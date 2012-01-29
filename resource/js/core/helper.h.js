@@ -67,7 +67,7 @@ var HelperH = {
 		}
 		return helper;
 	},
-	
+
 	/**
 	* 对helper的方法，进行mul化，使其在第一个参数为array时，结果也返回一个数组
 	* @method mul
@@ -76,7 +76,7 @@ var HelperH = {
 	* @param {boolean} recursive (Optional) 是否递归
 	* @return {Object} 方法已mul化的<strong>新的</strong>Helper
 	*/
-	mul: function (helper, recursive){ 
+	mul: function (helper, recursive){
 		var ret = {};
 		for(var i in helper){
 			if(typeof helper[i] == "function")
@@ -92,7 +92,7 @@ var HelperH = {
 	* @static
 	* @param {Object} helper Helper对象，如DateH
 	* @param {Object} obj 目标对象.
-	* @return {Object} 应用Helper后的对象 
+	* @return {Object} 应用Helper后的对象
 	*/
 	applyTo: function(helper,obj){
 
@@ -111,7 +111,7 @@ var HelperH = {
 		var ret = {};
 		for(var i in helper){
 			if(typeof helper[i] == "function" && !/^_/.test(i)){
-				ret[i] = FunctionH.methodize(helper[i], attr); 
+				ret[i] = FunctionH.methodize(helper[i], attr);
 			}
 		}
 		return ret;
@@ -128,8 +128,8 @@ var HelperH = {
 	methodizeTo: function(helper, obj, attr){
 
 		helper = HelperH.methodize(helper,attr);	//方法化
-		
-		return ObjectH.mix(obj, helper);  //复制属性		 
+
+		return ObjectH.mix(obj, helper);  //复制属性
 	},
 	/**
 	* 得到一个HelperWrap
@@ -149,10 +149,10 @@ var HelperH = {
 		return new HWrap(helper);
 	},
 	/**
-	* 根据一个Helper创建一个对象， Helper上的方法作为对象方法，_init作为构造函数 
+	* 根据一个Helper创建一个对象， Helper上的方法作为对象方法，_init作为构造函数
 	* @method createClass
 	* @static
-	* @param {Object} helper Helper对象，如DateH 
+	* @param {Object} helper Helper对象，如DateH
 	* @return {Function} 被创建的对象
 	*/
 	createClass : function(helper){
@@ -160,7 +160,7 @@ var HelperH = {
 		if(typeof helper._init == "function"){
 			C = FunctionH.methodize(helper._init);
 		}
-		HelperH.methodizeTo(helper.prototype, C);	
+		HelperH.methodizeTo(helper.prototype, C);
 		return C;
 	}
 };

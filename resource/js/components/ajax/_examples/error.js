@@ -1,3 +1,3 @@
-var Test = 
+var Test =
 	a: 1
 };

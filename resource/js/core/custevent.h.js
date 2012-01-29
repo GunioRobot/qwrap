@@ -69,7 +69,7 @@ mix(CustEvent.prototype,{
 var CustEventTargetH = {
 	/**
 	* 添加监控
-	* @method on 
+	* @method on
 	* @param {string} sEvent 事件名称。
 	* @param {Function} fn 监控函数，在CustEvent fire时，this将会指向oScope，而第一个参数，将会是一个CustEvent对象。
 	* @return {boolean} 是否成功添加监控。例如：重复添加监控，会导致返回false.
@@ -104,7 +104,7 @@ var CustEventTargetH = {
 	* 事件触发。触发事件时，在监控函数里，this将会指向oScope，而第一个参数，将会是一个CustEvent对象，与Dom3的listener的参数类似。<br/>
 	  如果this.target['on'+this.type],则也会执行该方法,与HTMLElement的独占模式的事件(如el.onclick=function(){alert(1)})类似.<br/>
 	  如果createEvents的事件类型中包含"*"，则所有事件最终也会落到on("*").
-	* @method fire 
+	* @method fire
 	* @param {string | sEvent} sEvent 自定义事件，或事件名称。 如果是事件名称，相当于传new CustEvent(this,sEvent,eventArgs).
 	* @optional {object} eventArgs 自定义事件参数
 	* @return {boolean} 以下两种情况返回false，其它情况下返回true.
@@ -128,7 +128,7 @@ var CustEventTargetH = {
 		if(obj && obj['on'+custEvent.type]) {
 			var retDef=obj['on'+custEvent.type].call(obj,custEvent);//对于独占模式的返回值，会弱影响event.returnValue
 		}
-		
+
 		for(var i=0;i<cbs.length;i++){
 			cbs[i].call(obj,custEvent);
 		}
@@ -158,7 +158,7 @@ var CustEventTargetH = {
 CustEvent.createEvents=CustEventTargetH.createEvents;
 
 QW.CustEvent = CustEvent;
-QW.CustEventTargetH = CustEventTargetH; 
+QW.CustEventTargetH = CustEventTargetH;
 })();
 
 

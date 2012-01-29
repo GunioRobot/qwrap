@@ -18,7 +18,7 @@ describe('DOM_Integrity_Retouch', {
 		var node = QW.NodeW.query(0, 'div.test');
 		value_of(node.core.length).should_be(1);
 		document.body.removeChild(node.core[0]);
-		
+
 		var node = QW.NodeW.query(0, 'div.test1');
 		value_of(node.core.length).should_be(0);
 	}
@@ -155,7 +155,7 @@ describe('DOM_Integrity_Retouch', {
 	, 'appendChild insertSiblingBefore' : function () {
 		var node = QW.Dom.create('<div id="test">1</div>');
 		QW.Dom.appendChild(document.body, node);
-		
+
 		value_of(QW.$('test')).should_not_be(null);
 
 		QW.Dom.insertSiblingBefore(node.firstChild, document.createTextNode('0'));
@@ -199,7 +199,7 @@ describe('DOM_Integrity_Retouch', {
 		var node = QW.$('test');
 
 		value_of(node.offsetHeight).should_be(20);
-		
+
 		QW.Dom.setSize(node, 30, 30);
 		value_of(node.offsetHeight).should_be(30);
 
@@ -215,7 +215,7 @@ describe('DOM_Integrity_Retouch', {
 
 		QW.Dom.setXY(node, 11, 11);
 		value_of(QW.Dom.getXY(node).toString()).should_be('11,11');
-	
+
 		QW.Dom.setRect(node, 12, 12, 30, 30);
 		var temp = QW.Dom.getRect(node);
 		value_of([temp.top, temp.right, temp.bottom, temp.left, temp.width, temp.height].toString()).should_be('12,42,42,12,30,30');

@@ -37,7 +37,7 @@ NEED=0   #需要对文件加密设置为1，不需则为0
 
 find ./ -type d -name .svn|xargs -i rm -rf {}   #提前删除SVN管理目录
 
-[ -e make.pl ] && perl make.pl .		#查找配置脚本make.pl，如果存在，则运行该脚本 
+[ -e make.pl ] && perl make.pl .		#查找配置脚本make.pl，如果存在，则运行该脚本
 
 cd ..
 #encode if this module NEED and encode target file folder
@@ -59,14 +59,14 @@ else
 	echo "请不要在模块中添加output目录并提交文件，如果已提交文件，请申请cvs后台删除操作。"
 fi
 
-#[ -e $module_enc/make.pl ] && perl $module_enc/make.pl	$module_enc		#查找配置脚本make.pl，如果存在，则运行该脚本 
+#[ -e $module_enc/make.pl ] && perl $module_enc/make.pl	$module_enc		#查找配置脚本make.pl，如果存在，则运行该脚本
 rm -rf .tmp
 
 #打包成mall-php
 mkdir -p .tmp/$folderpath
 cp -r $modulename .tmp/$folderpath
 
-[ -e .tmp/$folderpath/$modulename/compress_file.pl ] && rm -r .tmp/$folderpath/$modulename/compress_file.pl 
+[ -e .tmp/$folderpath/$modulename/compress_file.pl ] && rm -r .tmp/$folderpath/$modulename/compress_file.pl
 [ -e .tmp/$folderpath/$modulename/make.pl ]  && rm .tmp/$folderpath/$modulename/make.pl
 [ -e .tmp/$folderpath/$modulename/make.ini ]  && rm .tmp/$folderpath/$modulename/make.ini
 [ -e .tmp/$folderpath/$modulename/yuicompressor-2.3.5.jar ]  && rm .tmp/$folderpath/$modulename/yuicompressor-2.3.5.jar
@@ -94,7 +94,7 @@ rm .tmp/$folderpath/$modulename/$progname
 
 pwd
 
-#历史问题目录名不能有"_",所以要处理。。 
+#历史问题目录名不能有"_",所以要处理。。
 #[[ "${modulename/com-/}" != "$modulename" ]] && mv .tmp/$folderpath/$modulename .tmp/$folderpath/$(echo $modulename|sed 's/com-/_/')
 
 #打tar包排除文件功能，如果想排除其他文件或目录在$module_enc前加"--exclude $module_enc/目录名/文件名"即可。
@@ -109,14 +109,14 @@ else
 fi
 
 if [  -e .tmp/htdocs/* ]; then
-	find .tmp/htdocs/ -type d -name _*|xargs -i rm -rf {}	#提前删除js|css|static里一切以_开头的目录	
+	find .tmp/htdocs/ -type d -name _*|xargs -i rm -rf {}	#提前删除js|css|static里一切以_开头的目录
 fi
 
 RETVAL=$?
 [ $RETVAL -gt 0 ] && echo "tar failed!" && exit $RETVAL
 [ $NEED -eq 1 ] && rm -rf $module_enc #只对加密情况下删除此目录
 if [ ! -d $modulename/output ];then
-	mkdir $modulename/output 
+	mkdir $modulename/output
 	RETVAL=$?
 	[ $RETVAL -gt 0 ] && echo "create output folder failed!"  && exit $RETVAL
 fi

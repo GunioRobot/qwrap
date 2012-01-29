@@ -68,7 +68,7 @@
 				<button id="ajax3">Add 3</button>
 				<button id="ajax4">Add 4</button>
 				<div id="content1" class="comment">
-				
+
 				</div>
 				<textarea>
 				var Q = QW.AjaxManager.Queue;
@@ -114,7 +114,7 @@
 				<button id="ajax7">Add 3</button>
 				<button id="ajax8">Add 4</button>
 				<div id="content2" class="comment">
-				
+
 				</div>
 				<textarea>
 				var queue2 = new Q(2);
@@ -160,7 +160,7 @@
 		NodeW.query(0,'.comment').on('dblclick',function(){
 			NodeW.nextSibling(this,'textarea').show('block');
 		});
-		
+
 		NodeW.query(0,'.comment + textarea').on('dblclick',function(){
 			(new NodeW(this)).hide();
 		});
@@ -219,8 +219,8 @@
 				});
 				queue.add(ajax);
 				$('content1').innerHTML += 'Ajax 4 added into queue<br>';
-			});		
-			
+			});
+
 			var queue2 = new Q(2);
 			$$('ajax5').on('click',function(){
 				var ajax = new Ajax({

@@ -3,7 +3,7 @@ var TH={};
 TH.analyse =function (value){
 	/**
 	解析一个变量
-	@param {String} value 变量名 
+	@param {String} value 变量名
 	@returns {Json} 返回分析结果，分析结果包括：
 		{Object} value 返回其值
 		{boolean} hasChildren 是否有children
@@ -11,7 +11,7 @@ TH.analyse =function (value){
 		{String} sConstructor 构造函数：null/undefined/number/string/boolean
 				/Object/Array/String/Number...
 				/Element/Event
-		{String} summary 主要信息 
+		{String} summary 主要信息
 				对于Array，返回前三个对象的sConstructor,以及总长度
 				对于Object，返回前三个对象的key,sConstructor,以及总长度
 				对于Element，返回tagName#id.className,
@@ -41,7 +41,7 @@ TH.analyse =function (value){
 				else{
 					sConstructor=trim((constructor+"").split("(")[0].replace("function",""));
 				}
-				
+
 				//得到summary
 				if(nodeType=="1"){//HTML Element
 					summary=value.tagName+(value.id?"#"+value.id:"")+(value.className?"."+value.className:"");
@@ -110,7 +110,7 @@ TH.analyse =function (value){
 TH.stringify = function (val){
 	/**
 	* 返回对val的描述。
-	* @param {any} val 分析对象 
+	* @param {any} val 分析对象
 	* @returns {string} 返回分析结果
 	*/
 	var info=TH.analyse(val);
@@ -159,7 +159,7 @@ var TH=TestH,
 		for(var i in src) if(!(i in obj)) obj[i]=src[i];
 	},
 	$=function(id){
-		return document.getElementById(id);	
+		return document.getElementById(id);
 	},
 	createEl=function(){
 		var div=document.createElement("div");
@@ -350,9 +350,9 @@ var Logger=UT.Logger={
 			}
 			html.push('<p>',currentErrorMsg || ex && ex.message || '','</p>')
 			if(ex){
-				if(Browser.Webkit) 
+				if(Browser.Webkit)
 					html.push('<p> at ',ex.sourceURL,', line ',ex.line,'</p>');
-				else 
+				else
 					html.push('<p> at ',ex.fileName,', line ',ex.lineNumber,'</p>');
 			}
 			infoEl.innerHTML=html.join("");
@@ -373,7 +373,7 @@ var Spec=UT.Spec = function(context, caseMap, base) {
 
 mix(Spec.prototype,{
 	rerun: function (){
-		
+
 
 	}
 });
@@ -419,7 +419,7 @@ mix(Subject.prototype,{
 			currentCaseStatus|=4;
 			currentErrorMsg="Not match: "+ex.message;
 			currentShouldInfo=tempCur;
-			return; 
+			return;
 		}
 		if(result !== true) {//Not Match
 			currentCaseStatus|=4;
@@ -531,7 +531,7 @@ if(Browser.Trident){
 		Logger.renderResult({message:currentErrorMsg||message,fileName:fileName,lineNumber:lineNumber});
 		return true;
 	};
-	
+
 }
 window.onload=function(){
 	Logger.init();

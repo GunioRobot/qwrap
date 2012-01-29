@@ -6,8 +6,8 @@
 (function(){
 /**
  * @class Browser js的运行环境，浏览器以及版本信息
- * @singleton 
- * @namespace QW 
+ * @singleton
+ * @namespace QW
  */
 var Browser=b=function(){
 	var na=window.navigator,ua = na.userAgent.toLowerCase();
@@ -51,7 +51,7 @@ Browser.detect = curry(overload,
 		if(b.safari) return "@safari";
 		if(b.firefox) return "@firefox";
 		if(b.chrome) return "@chrome";
-		return "@unknown"; 
+		return "@unknown";
 	 }]
 );*/
 

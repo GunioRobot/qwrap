@@ -10,7 +10,7 @@
 		CustEvent.createEvents(this,"play,beforeplay,stop,pause,resume,suspend,reset");
 		return this;
 	}
-	
+
 	Effect._fps = 28;
 	/**
 	 * 动画播放器
@@ -18,12 +18,12 @@
 	Effect._interval=window.setInterval("QW.Effect._playAll()",Effect._fps);
 
 	/**
-	 *正在播放的动画 
+	 *正在播放的动画
 	 */
 	Effect._playingObjs=[];
 
 	/**
-	 *按步播放所有正在播放的动画 
+	 *按步播放所有正在播放的动画
 	 */
 	Effect._playAll=function(){
 		for(var i=0;i<Effect._playingObjs.length;i++){
@@ -49,7 +49,7 @@
 	}
 
 	/**
-	 *开始播放 
+	 *开始播放
 	 */
 	Effect.prototype.play = function(){
 		var idx=Effect._playingObjs.indexOf(this);
@@ -61,7 +61,7 @@
 	}
 
 	/**
-	 *停止播放 
+	 *停止播放
 	 */
 	Effect.prototype.stop = function(){
 		var idx=Effect._playingObjs.indexOf(this);
@@ -73,7 +73,7 @@
 	}
 
 	/**
-	 *播放到最后 
+	 *播放到最后
 	 */
 	Effect.prototype.suspend = function(){
 		var idx=Effect._playingObjs.indexOf(this);
@@ -84,7 +84,7 @@
 	}
 
 	/**
-	 *暂停播放 
+	 *暂停播放
 	 */
 	Effect.prototype.pause = function(){
 		var idx=Effect._playingObjs.indexOf(this);
@@ -96,7 +96,7 @@
 	}
 
 	/**
-	 *继续播放 
+	 *继续播放
 	 */
 	Effect.prototype.resume = function(){
 		var idx=Effect._playingObjs.indexOf(this);
@@ -108,7 +108,7 @@
 		}
 	}
 	/**
-	 *播放到最开始 
+	 *播放到最开始
 	 */
 	Effect.prototype.reset = function(){
 		this._startDate=new Date();
@@ -116,6 +116,6 @@
 		this.eftFun(0);
 		this.fire("reset");
 	}
-	
+
 	QW.Effect = Effect;
 })();

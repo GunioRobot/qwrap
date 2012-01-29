@@ -1,6 +1,6 @@
-/** 
+/**
 * Dom Utils，是Dom模块核心类
-* @class DomU 
+* @class DomU
 * @singleton
 * @namespace QW
 */
@@ -8,8 +8,8 @@ QW.DomU = function () {
 	var Selector=QW.Selector;
 	var DomU = {
 
-		/** 
-		* 按cssselector获取元素集 
+		/**
+		* 按cssselector获取元素集
 		* @method	query
 		* @param {String} sSelector cssselector字符串
 		* @param {Element} refEl (Optional) 参考元素，默认为document.documentElement
@@ -18,8 +18,8 @@ QW.DomU = function () {
 		query: function (sSelector,refEl) {
 			return Selector.query(refEl || document.documentElement,sSelector);
 		},
-		/** 
-		* 获取doc的一些坐标信息 
+		/**
+		* 获取doc的一些坐标信息
 		* @method	getDocRect
 		* @param	{object} doc (Optional) document对象/默认为当前宿主的document
 		* @return	{object} 包含doc的scrollX,scrollY,width,height,scrollHeight,scrollWidth值的json
@@ -49,12 +49,12 @@ QW.DomU = function () {
 				width  = win.innerWidth;
 				if (doc.height>height) height -= 16;
 				if (doc.width>width)   width  -= 16;
-			} 
+			}
 
 			if (/webkit/i.test(window.navigator.userAgent)) {
 				scrollHeight = Math.max(scrollHeight, $F(doc.body.scrollHeight));
 			}
-			
+
 			scrollHeight = Math.max(height, scrollHeight);
 			scrollWidth = Math.max(width, scrollWidth);
 
@@ -66,8 +66,8 @@ QW.DomU = function () {
 			};
 		}
 
-		/** 
-		* 通过html字符串创建Dom对象 
+		/**
+		* 通过html字符串创建Dom对象
 		* @method	create
 		* @param	{string}	html html字符串
 		* @param	{boolean}	rfrag (Optional) 是否返回documentFragment对象
@@ -81,7 +81,7 @@ QW.DomU = function () {
 				var dtemp = doc && doc.createElement('div') || temp;
 				dtemp.innerHTML = html;
 				var element = dtemp.firstChild;
-				
+
 				if (!element || !rfrag) {
 					return element;
 				} else {
@@ -93,7 +93,7 @@ QW.DomU = function () {
 			};
 		}()
 
-		/** 
+		/**
 		* 把NodeCollection转为ElementCollection
 		* @method	pluckWhiteNode
 		* @param	{NodeCollection|array} list Node的集合
@@ -106,7 +106,7 @@ QW.DomU = function () {
 			return result;
 		}
 
-		/** 
+		/**
 		* 判断Node实例是否继承了Element接口
 		* @method	isElement
 		* @param	{object} element Node的实例
@@ -116,7 +116,7 @@ QW.DomU = function () {
 			return !!(element && element.nodeType == 1);
 		}
 
-		/** 
+		/**
 		* 监听Dom树结构初始化完毕事件
 		* @method	ready
 		* @param	{function} handler 事件处理程序
@@ -145,9 +145,9 @@ QW.DomU = function () {
 				});
 			}
 		}
-	
 
-		/** 
+
+		/**
 		* 判断一个矩形是否包含另一个矩形
 		* @method	rectContains
 		* @param	{object} rect1	矩形
@@ -161,7 +161,7 @@ QW.DomU = function () {
 				&& rect1.bottom  >= rect2.bottom;
 		}
 
-		/** 
+		/**
 		* 判断一个矩形是否和另一个矩形有交集
 		* @method	rectIntersect
 		* @param	{object} rect1	矩形
@@ -174,7 +174,7 @@ QW.DomU = function () {
 				, r = Math.min( rect1.right,  rect2.right  )
 				, b = Math.min( rect1.bottom, rect2.bottom )
 				, l = Math.max( rect1.left,   rect2.left   );
-			
+
 			if (b >= t && r >= l) {
 				return { top : t, right : r, bottom: b, left : l };
 			} else {
@@ -182,7 +182,7 @@ QW.DomU = function () {
 			}
 		}
 
-		/** 
+		/**
 		* 创建一个element
 		* @method	createElement
 		* @param	{string}	tagName		元素类型
@@ -193,7 +193,7 @@ QW.DomU = function () {
 		, createElement : function (tagName, property, doc) {
 			doc = doc || document;
 			var element = doc.createElement(tagName);
-			
+
 			if (property) {
 				for (var i in property) element[i] = property[i];
 			}
@@ -201,6 +201,6 @@ QW.DomU = function () {
 		}
 
 	};
-	
+
 	return DomU;
 }();

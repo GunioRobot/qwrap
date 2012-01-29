@@ -16,9 +16,9 @@ while(<CONF>){
 	my $i = $_;
 	if(!/^\s+$/ && !/^#/){
 		chomp($i);
-		
+
 		my ($c, $p) = split(" ", $i);
-		
+
 		$p =~ s/\./\\\./g;
 		$p =~ s/\*/[^\/]\*/g;
 		$p =~ s/\?/[^\/]/g;
@@ -75,7 +75,7 @@ sub parseFile {
 	my $f = 0;
 	my $pa;
 
-	if(($file eq $path."/make.pl") or ($file eq $path."/make.ini") or ($file eq $path."/build.sh") or ($file eq $path."/yuicompressor-2.3.5.jar")){ 
+	if(($file eq $path."/make.pl") or ($file eq $path."/make.ini") or ($file eq $path."/build.sh") or ($file eq $path."/yuicompressor-2.3.5.jar")){
 		return	1;	#文件被保留
 	}
 	foreach $pa (@pattern) {
@@ -91,7 +91,7 @@ sub parseFile {
 		elsif($file =~ /^($path\/)?$pa->{p}$/){
 			$t = 1;
 		}
-		
+
 		if($t){
 				if($c eq "-e"){
 				#排除符合指定模式的文件

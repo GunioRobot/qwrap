@@ -26,7 +26,7 @@ sub dealImport{
 	if($in =~ /\.css\s*$/){
 		$type = "css";
 	};
-	
+
 	if($out eq ""){
 		$in =~s/\n//g;
 		$out = "tempfile_out.tmp.".$type;
@@ -38,8 +38,8 @@ sub dealImport{
 		$cmd = "cat ".$in." > ".$out;
 	}
 	print $cmd."\n";
-	system $cmd; 
-	
+	system $cmd;
+
 	my $ret = "";
 	compressFile($out, $type);
 	if($out =~ /^tempfile_out\.tmp\./){
@@ -62,7 +62,7 @@ sub compressFile{
 
 	print @cmd[0]."-jar ".$compressor." --type ".$type." --preserve-semi ".$file." -o ".$tmp."\n";
 	system @cmd[0]."-jar ".$compressor." --type ".$type." --preserve-semi ".$file." -o ".$tmp;
-	
+
 	my $ret="";
 
 	open(TMP,$tmp);
@@ -76,7 +76,7 @@ sub compressFile{
 	print OUT "\n";
 	close(OUT);
 	close(TMP);
-	
+
 	#删掉临时文件
 	system @cmd[2].$tmp;
 
@@ -125,14 +125,14 @@ sub preDeal{
 			$compressTag = 1;
 			open(PTMP,'>'.$tmp);
 			next;
-		}		
+		}
 		elsif(/}}end:compress/){
 			close(PTMP);
 			$compressTag = 0;
 			print POUT compressFile($tmp, $type);
 			system @cmd[2].$tmp;
 			next;
-		}		
+		}
 		if($compressTag){
 			print PTMP;
 		}else{
@@ -147,7 +147,7 @@ sub preDeal{
 }
 
 $file = fixPATH($file);				#修正路径（兼容windows）
-$compressor = fixPATH($compressor);	
+$compressor = fixPATH($compressor);
 
 #直接压缩脚本文件
 if($file =~ /\.js$/){

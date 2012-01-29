@@ -45,7 +45,7 @@ var Selector={
 	/*
 	 * 常用的Element属性
 	 */
-	_attrGetters:function(){ 
+	_attrGetters:function(){
 		var o={'class': 'el.className',
 			'for': 'el.htmlFor',
 			'href':'el.getAttribute("href",2)'};
@@ -53,12 +53,12 @@ var Selector={
 		for(var i=0,a;a=attrs[i];i++) o[a]="el."+a;
 		return o;
 	}(),
-	/* 
+	/*
 	 * 把一个selector字符串转化成一个过滤函数.
 	 * @method selector2Filter
 	 * @param {string} sSelector: 过滤selector，这个selector里没有关系运算符（", >+~"）
 	 * @returns {function} : 返回过滤函数。
-	 * @example: 
+	 * @example:
 		var fun=selector2Filter("input.aaa");alert(fun);
 	 */
 	selector2Filter:function(sSelector){
@@ -66,7 +66,7 @@ var Selector={
 	},
 	/*
 	 * 判断一个元素是否符合某selector.
-	 * @method test 
+	 * @method test
 	 * @param {HTMLElement} el: 被考察参数
 	 * @param {string} sSelector: 过滤selector，这个selector里没有关系运算符（", >+~"）
 	 * @returns {function} : 返回过滤函数。
@@ -74,9 +74,9 @@ var Selector={
 	test:function(el,sSelector){
 		return s2f(sSelector)(el);
 	},
-	/** 
+	/**
 	 * 用一个css selector来过滤一个数组.
-	 * @method filter 
+	 * @method filter
 	 * @static
 	 * @param {Array|Collection} els: 元素数组
 	 * @param {string} sSelector: 过滤selector，这个selector里没有关系运算符（", >+~"）
@@ -96,7 +96,7 @@ var Selector={
 	 * @param {HTMLElement} refEl: 参考对象
 	 * @param {string} sSelector: 过滤selector,
 	 * @returns {array} : 返回elements数组。
-	 * @example: 
+	 * @example:
 		var els=query(document,"input.aaa");
 		for(var i=0;i<els.length;i++ )els[i].style.backgroundColor='red';
 	 */
@@ -149,10 +149,10 @@ function s2f(sSelector){
 };
 */
 
-/* 
-* querySimple(pEl,sSelector): 得到pEl下的符合过滤条件的HTML Elements. 
+/*
+* querySimple(pEl,sSelector): 得到pEl下的符合过滤条件的HTML Elements.
 * sSelector里没有","运算符
-* pEl是默认是document.body 
+* pEl是默认是document.body
 * @see: query。
 */
 function querySimple(pEl,sSelector){

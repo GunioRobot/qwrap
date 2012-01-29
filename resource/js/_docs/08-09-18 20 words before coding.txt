@@ -10,7 +10,7 @@ Helper规范
 
 
 常用变量名或缩写:
-e	:	event 
+e	:	event
 el	:	element
 ex	:	exception
 arr	:	array
@@ -24,7 +24,7 @@ ctxt	:	context,上下文
 ctn	:	container,容器
 pEl	:	parentElement,父节点对象
 src	:	source/src,源头/src
-obj	:	object,目标/对象		
+obj	:	object,目标/对象
 
 
 

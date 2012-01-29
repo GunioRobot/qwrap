@@ -1,4 +1,4 @@
-/** 
+/**
 * @class NodeH Node Helper，针对element兼容处理和功能扩展
 * @singleton
 * @namespace QW
@@ -10,7 +10,7 @@ QW.NodeH = function () {
 	var Browser = QW.Browser;
 	var Selector = QW.Selector;
 
-	/** 
+	/**
 	* 获得element对象
 	* @method	$
 	* @param	{element|string|wrap}	element	id,Element实例或wrap
@@ -31,8 +31,8 @@ QW.NodeH = function () {
 	};
 
 	var NodeH = {
-		
-		/** 
+
+		/**
 		* 获得element对象的outerHTML属性
 		* @method	outerHTML
 		* @param	{element|string|wrap}	element	id,Element实例或wrap
@@ -41,7 +41,7 @@ QW.NodeH = function () {
 		*/
 		outerHTML : function () {
 			var temp = document.createElement('div');
-			
+
 			return function (element, doc) {
 				element = $(element);
 				if ('outerHTML' in element) {
@@ -55,7 +55,7 @@ QW.NodeH = function () {
 			};
 		}()
 
-		/** 
+		/**
 		* 判断element是否包含某个className
 		* @method	hasClass
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -67,7 +67,7 @@ QW.NodeH = function () {
 			return new RegExp('(?:^|\\s)' + regEscape(className) + '(?:\\s|$)', 'i').test(element.className);
 		}
 
-		/** 
+		/**
 		* 给element添加className
 		* @method	addClass
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -80,7 +80,7 @@ QW.NodeH = function () {
 				element.className = element.className ? element.className + ' ' + className : className;
 		}
 
-		/** 
+		/**
 		* 移除element某个className
 		* @method	removeClass
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -93,7 +93,7 @@ QW.NodeH = function () {
 				element.className = element.className.replace(new RegExp('(?:^|\\s)' + regEscape(className) + '(?=\\s|$)', 'ig'), '');
 		}
 
-		/** 
+		/**
 		* 替换element的className
 		* @method	replaceClass
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -110,7 +110,7 @@ QW.NodeH = function () {
 			}
 		}
 
-		/** 
+		/**
 		* element的className1和className2切换
 		* @method	toggleClass
 		* @param	{element|string|wrap}	element			id,Element实例或wrap
@@ -127,7 +127,7 @@ QW.NodeH = function () {
 			}
 		}
 
-		/** 
+		/**
 		* 显示element对象
 		* @method	show
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -139,7 +139,7 @@ QW.NodeH = function () {
 			element.style.display = value || '';
 		}
 
-		/** 
+		/**
 		* 隐藏element对象
 		* @method	hide
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -150,7 +150,7 @@ QW.NodeH = function () {
 			element.style.display = 'none';
 		}
 
-		/** 
+		/**
 		* 隐藏/显示element对象
 		* @method	toggle
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -165,7 +165,7 @@ QW.NodeH = function () {
 			}
 		}
 
-		/** 
+		/**
 		* 判断element对象是否可见
 		* @method	isVisible
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -179,7 +179,7 @@ QW.NodeH = function () {
 		}
 
 
-		/** 
+		/**
 		* 获取element对象距离doc的xy坐标
 		* @method	getXY
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -215,7 +215,7 @@ QW.NodeH = function () {
 
 			} else {
 
-				return function(element) { 
+				return function(element) {
 				// manually calculate by crawling up offsetParents
 					element = $(element);
 					var pos = [element.offsetLeft, element.offsetTop];
@@ -234,14 +234,14 @@ QW.NodeH = function () {
 						while (parentNode) {
 							pos[0] += parentNode.offsetLeft;
 							pos[1] += parentNode.offsetTop;
-							if (!accountForBody && Browser.safari && NodeH.getCurrentStyle(parentNode, 'position') == 'absolute') { 
+							if (!accountForBody && Browser.safari && NodeH.getCurrentStyle(parentNode, 'position') == 'absolute') {
 								accountForBody = true;
 							}
 							parentNode = parentNode.offsetParent;
 						}
 					}
 
-					if (accountForBody) { 
+					if (accountForBody) {
 					//safari doubles in this case
 						pos[0] -= element.ownerDocument.body.offsetLeft;
 						pos[1] -= element.ownerDocument.body.offsetTop;
@@ -253,14 +253,14 @@ QW.NodeH = function () {
 					while ( parentNode.tagName && !patterns.ROOT_TAG.test(parentNode.tagName) ) {
 						if (parentNode.scrollTop || parentNode.scrollLeft) {
 						// work around opera inline/table scrollLeft/Top bug (false reports offset as scroll)
-							if (!patterns.OP_SCROLL.test(NodeH.getCurrentStyle(parentNode, 'display'))) { 
+							if (!patterns.OP_SCROLL.test(NodeH.getCurrentStyle(parentNode, 'display'))) {
 								if (!Browser.opera || NodeH.getCurrentStyle(parentNode, 'overflow') !== 'visible') { // opera inline-block misreports when visible
 									pos[0] -= parentNode.scrollLeft;
 									pos[1] -= parentNode.scrollTop;
 								}
 							}
 						}
-						parentNode = parentNode.parentNode; 
+						parentNode = parentNode.parentNode;
 					}
 
 					return pos;
@@ -270,7 +270,7 @@ QW.NodeH = function () {
 
 		}()
 
-		/** 
+		/**
 		* 设置element对象的xy坐标
 		* @method	setXY
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -286,7 +286,7 @@ QW.NodeH = function () {
 			if ( !isNaN(y) ) NodeH.setStyle(element, 'top', y + 'px');
 		}
 
-		/** 
+		/**
 		* 设置element对象的offset宽高
 		* @method	setSize
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -308,7 +308,7 @@ QW.NodeH = function () {
 			if ( !isNaN(h) ) NodeH.setStyle(element, 'height', Math.max(+h - borders[0] - borders[2] - paddings[1] - paddings[2], 0) + 'px');
 		}
 
-		/** 
+		/**
 		* 设置element对象的宽高
 		* @method	setInnerSize
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -325,7 +325,7 @@ QW.NodeH = function () {
 			if ( !isNaN(h) ) NodeH.setStyle(element, 'height', h + 'px');
 		}
 
-		/** 
+		/**
 		* 设置element对象的offset宽高和xy坐标
 		* @method	setRect
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -340,7 +340,7 @@ QW.NodeH = function () {
 			NodeH.setSize(element, w, h);
 		}
 
-		/** 
+		/**
 		* 设置element对象的宽高和xy坐标
 		* @method	setRect
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -355,7 +355,7 @@ QW.NodeH = function () {
 			NodeH.setInnerSize(element, w, h);
 		}
 
-		/** 
+		/**
 		* 获取element对象的宽高
 		* @method	getSize
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -366,7 +366,7 @@ QW.NodeH = function () {
 			return { width : element.offsetWidth, height : element.offsetHeight };
 		}
 
-		/** 
+		/**
 		* 获取element对象的宽高和xy坐标
 		* @method	setRect
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -377,7 +377,7 @@ QW.NodeH = function () {
 			var p = NodeH.getXY(element);
 			var x = p[0];
 			var y = p[1];
-			var w = element.offsetWidth; 
+			var w = element.offsetWidth;
 			var h = element.offsetHeight;
 			return {
 				'width'  : w,    'height' : h,
@@ -386,7 +386,7 @@ QW.NodeH = function () {
 			};
 		}
 
-		/** 
+		/**
 		* 向后获取element对象复合条件的兄弟节点
 		* @method	nextSibling
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -402,7 +402,7 @@ QW.NodeH = function () {
 			return element;
 		}
 
-		/** 
+		/**
 		* 向前获取element对象复合条件的兄弟节点
 		* @method	previousSibling
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -414,11 +414,11 @@ QW.NodeH = function () {
 			element = $(element);
 			do {
 				element = element.previousSibling;
-			} while (element && !fcheck(element)); 
+			} while (element && !fcheck(element));
 			return element;
 		}
 
-		/** 
+		/**
 		* 向上获取element对象复合条件的兄弟节点
 		* @method	previousSibling
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -434,7 +434,7 @@ QW.NodeH = function () {
 			return element;
 		}
 
-		/** 
+		/**
 		* 向上获取element对象复合条件的兄弟节点
 		* @method	parentNode
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -445,7 +445,7 @@ QW.NodeH = function () {
 			return NodeH.ancestorNode(element, selector);
 		}
 
-		/** 
+		/**
 		* 从element对象内起始位置获取复合条件的节点
 		* @method	firstChild
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -459,7 +459,7 @@ QW.NodeH = function () {
 			return element;
 		}
 
-		/** 
+		/**
 		* 从element对象内结束位置获取复合条件的节点
 		* @method	lastChild
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -473,7 +473,7 @@ QW.NodeH = function () {
 			return element;
 		}
 
-		/** 
+		/**
 		* 判断目标是否是element对象的子孙节点
 		* @method	contains
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -487,7 +487,7 @@ QW.NodeH = function () {
 				: !!(element.compareDocumentPosition(target) & 16);
 		}
 
-		/** 
+		/**
 		* 向element对象前/后，内起始，内结尾插入html
 		* @method	insertAdjacentHTML
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -526,7 +526,7 @@ QW.NodeH = function () {
 			}
 		}
 
-		/** 
+		/**
 		* 向element对象前/后，内起始，内结尾插入element对象
 		* @method	insertAdjacentElement
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -557,7 +557,7 @@ QW.NodeH = function () {
 			return target;
 		}
 
-		/** 
+		/**
 		* 向element对象内追加element对象
 		* @method	firstChild
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -568,7 +568,7 @@ QW.NodeH = function () {
 			return $(element).appendChild($(target));
 		}
 
-		/** 
+		/**
 		* 向element对象前插入element对象
 		* @method	insertSiblingBefore
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -580,7 +580,7 @@ QW.NodeH = function () {
 			return element.parentNode.insertBefore($(nelement), element);
 		}
 
-		/** 
+		/**
 		* 向element对象后插入element对象
 		* @method	insertSiblingAfter
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -592,7 +592,7 @@ QW.NodeH = function () {
 			element.parentNode.insertBefore($(nelement), element.nextSibling || null);
 		}
 
-		/** 
+		/**
 		* 向element对象内部的某元素前插入element对象
 		* @method	insertBefore
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -604,7 +604,7 @@ QW.NodeH = function () {
 			return $(element).insertBefore($(nelement), relement && $(relement) || null);
 		}
 
-		/** 
+		/**
 		* 向element对象内部的某元素后插入element对象
 		* @method	insertAfter
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -616,7 +616,7 @@ QW.NodeH = function () {
 			return $(element).insertBefore($(nelement), relement && $(relement).nextSibling || null);
 		}
 
-		/** 
+		/**
 		* 用一个元素替换自己
 		* @method	replaceNode
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -628,7 +628,7 @@ QW.NodeH = function () {
 			return element.parentNode.replaceChild($(nelement), element);
 		}
 
-		/** 
+		/**
 		* 从element里把relement替换成nelement
 		* @method	replaceChild
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -640,7 +640,7 @@ QW.NodeH = function () {
 			return $(element).replaceChild($(nelement), $(relement));
 		}
 
-		/** 
+		/**
 		* 把element移除掉
 		* @method	removeNode
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -651,7 +651,7 @@ QW.NodeH = function () {
 			return element.parentNode.removeChild(element);
 		}
 
-		/** 
+		/**
 		* 从element里把target移除掉
 		* @method	removeChild
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -661,7 +661,7 @@ QW.NodeH = function () {
 		, removeChild : function (element, target) {
 			return $(element).removeChild($(target));
 		}
-		/** 
+		/**
 		* 对元素调用ObjectH.get
 		* @method	get
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -675,7 +675,7 @@ QW.NodeH = function () {
 			return ObjectH.getEx.apply(null, arguments);
 		}
 
-		/** 
+		/**
 		* 对元素调用ObjectH.set
 		* @method	set
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -689,12 +689,12 @@ QW.NodeH = function () {
 			ObjectH.setEx.apply(null, arguments);
 		}
 
-		/** 
+		/**
 		* 获取element对象的属性
 		* @method	getAttr
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
 		* @param	{string}				attribute	属性名称
-		* @param	{int}					iFlags		(Optional)ieonly 获取属性值的返回类型 可设值0,1,2,4 
+		* @param	{int}					iFlags		(Optional)ieonly 获取属性值的返回类型 可设值0,1,2,4
 		* @return	{string}				属性值 ie里有可能不是object
 		*/
 		, getAttr : function (element, attribute, iFlags) {
@@ -702,7 +702,7 @@ QW.NodeH = function () {
 			return element.getAttribute(attribute, iFlags || null);
 		}
 
-		/** 
+		/**
 		* 设置element对象的属性
 		* @method	setAttr
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -716,7 +716,7 @@ QW.NodeH = function () {
 			element.setAttribute(attribute, value, iCaseSensitive || null);
 		}
 
-		/** 
+		/**
 		* 删除element对象的属性
 		* @method	removeAttr
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -729,7 +729,7 @@ QW.NodeH = function () {
 			return element.removeAttribute(attribute, iCaseSensitive || 0);
 		}
 
-		/** 
+		/**
 		* 根据条件查找element内元素
 		* @method	query
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -741,7 +741,7 @@ QW.NodeH = function () {
 			return Selector.query(element, selector || '');
 		}
 
-		/** 
+		/**
 		* 查找element内所有包含className的集合
 		* @method	getElementsByClass
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -753,7 +753,7 @@ QW.NodeH = function () {
 			return Selector.query(element, '.' + className);
 		}
 
-		/** 
+		/**
 		* 获取element的value
 		* @method	getValue
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -765,40 +765,40 @@ QW.NodeH = function () {
 			return element.value;
 		}
 
-		/** 
+		/**
 		* 设置element的value
 		* @method	setValue
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
 		* @param	{string}				value		内容
-		* @return	{void}					
+		* @return	{void}
 		*/
 		, setValue : function (element, value) {
 			$(element).value=value;
 		}
 
-		/** 
+		/**
 		* 获取element的innerHTML
 		* @method	getHTML
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
-		* @return	{string}					
+		* @return	{string}
 		*/
 		, getHtml : function (element) {
 			element = $(element);
 			return element.innerHTML;
 		}
 
-		/** 
+		/**
 		* 设置element的innerHTML
 		* @method	setHtml
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
 		* @param	{string}				value		内容
-		* @return	{void}					
+		* @return	{void}
 		*/
 		, setHtml : function (element,value) {
 			$(element).innerHTML=value;
 		}
 
-		/** 
+		/**
 		* 获得form的所有elements并把value转换成由'&'连接的键值字符串
 		* @method	encodeURIForm
 		* @param	{element}	element			form对象
@@ -818,12 +818,12 @@ QW.NodeH = function () {
 				, push = function (name, value) {
 					result.push(encodeURIComponent(name) + '=' + encodeURIComponent(value));
 				};
-			
+
 			for (; i < l ; ++ i) {
 				var el = els[i], name = el.name, value;
 
 				if (el.disabled || !name) continue;
-				
+
 				switch (el.type) {
 					case "text":
 					case "hidden":
@@ -853,7 +853,7 @@ QW.NodeH = function () {
 			return result.join("&");
 		}
 
-		/** 
+		/**
 		* 判断form的内容是否有改变
 		* @method	isFormChanged
 		* @param	{element}	element			form对象
@@ -867,10 +867,10 @@ QW.NodeH = function () {
 			filter = filter || function (element) { return false; };
 
 			var els = element.elements, l = els.length, i = 0, j = 0, el, opts;
-			
+
 			for (; i < l ; ++ i, j = 0) {
 				el = els[i];
-				
+
 				switch (el.type) {
 					case "text":
 					case "hidden":
@@ -899,7 +899,7 @@ QW.NodeH = function () {
 			return false;
 		}
 
-		/** 
+		/**
 		* 克隆元素
 		* @method	cloneNode
 		* @param	{element}	element			form对象
@@ -929,12 +929,12 @@ QW.NodeH = function () {
 			return result;
 		};
 
-		/** 
+		/**
 		* 获得element对象的样式
 		* @method	getStyle
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
 		* @param	{string}				attribute	样式名
-		* @return	{string}				
+		* @return	{string}
 		*/
 		NodeH.getStyle = function (element, attribute) {
 			element = $(element);
@@ -948,13 +948,13 @@ QW.NodeH = function () {
 			}
 			return (!result || result == 'auto') ? null : result;
 		};
-		
-		/** 
+
+		/**
 		* 获得element对象当前的样式
 		* @method	getCurrentStyle
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
 		* @param	{string}				attribute	样式名
-		* @return	{string}				
+		* @return	{string}
 		*/
 		NodeH.getCurrentStyle = function (element, attribute, pseudo) {
 			element = $(element);
@@ -972,11 +972,11 @@ QW.NodeH = function () {
 					if (result[1]) return parseInt(result[1], 10) / 100;
 				return 1.0;
 			}
-			
+
 			return (!result || result == 'auto') ? null : result;
 		};
-		
-		/** 
+
+		/**
 		* 设置element对象的样式
 		* @method	setStyle
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -994,7 +994,7 @@ QW.NodeH = function () {
 			}
 
 			//if (element.currentStyle && !element.currentStyle['hasLayout']) element.style.zoom = 1;
-			
+
 			for (var prop in attributes) {
 				if ('opacity' == prop && !!window.ActiveXObject) {
 					element.style['filter'] = 'alpha(opacity=' + (attributes[prop] * 100) + ')';
@@ -1004,7 +1004,7 @@ QW.NodeH = function () {
 			}
 		};
 
-		/** 
+		/**
 		* 获取element对象的border宽度
 		* @method	borderWidth
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -1025,7 +1025,7 @@ QW.NodeH = function () {
 			];
 		};
 
-		/** 
+		/**
 		* 获取element对象的padding宽度
 		* @method	paddingWidth
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -1041,7 +1041,7 @@ QW.NodeH = function () {
 			];
 		};
 
-		/** 
+		/**
 		* 获取element对象的margin宽度
 		* @method	marginWidth
 		* @param	{element|string|wrap}	element		id,Element实例或wrap
@@ -1059,6 +1059,6 @@ QW.NodeH = function () {
 	}();
 
 	NodeH.$ = $;
-	
+
 	return NodeH;
 }();

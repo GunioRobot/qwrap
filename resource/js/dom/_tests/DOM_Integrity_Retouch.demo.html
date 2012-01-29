@@ -47,7 +47,7 @@ var simpleDrag = function (target) {
 	var move = function (e) {
 		twrap.setXY(e.pageX - x, e.pageY - y);
 	};
-	
+
 	var up = function () {
 		QW.NodeW.un(doc, 'mousemove', move).un('mouseup', up);
 	};

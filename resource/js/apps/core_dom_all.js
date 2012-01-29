@@ -7,7 +7,7 @@ for (var i = 0; i < els.length; i++) {
 		break;
 	}
 }
- 
+
 //通过以下update-tag，来解决core与dom不是同时提测的问题
 //update-tag: core/* -
 //update-tag: dom/* tag001

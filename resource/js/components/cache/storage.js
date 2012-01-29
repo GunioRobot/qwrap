@@ -6,7 +6,7 @@
  * @class Storage Storage¿‡
  * @namespace QW
  */
- (function() { 
+ (function() {
 	var Dom = QW.Dom,
 		mix = QW.ObjectH.mix,
 		extend = QW.ClassH.extend,
@@ -98,7 +98,7 @@
 			init : function(){
 				this.path = "http://co.youa.baidu.com/picture/r/mall/js/cache.swf";
 				try {
-					if (external.max_language_id != undefined){  
+					if (external.max_language_id != undefined){
 						this.path += "?random=" + Math.random();
 					}
 				}catch (e){}
@@ -129,7 +129,7 @@
 			}
 		};
 	})(), true);
-	
+
 	var LocalStorage = extend(function(){}, BaseStorage);
 	mix(LocalStorage.prototype, (function() {
 		return {
@@ -199,5 +199,5 @@
 		}
 	})());
 
-	QW.provide('Storage', Storage);	
+	QW.provide('Storage', Storage);
  })();

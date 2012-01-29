@@ -23,7 +23,7 @@
 		 * @param {Function} reviver (Optional) 解析时使用的过滤器
 		 * @return {Object} 返回反序列化后的对象或数组
 		 * @throw {SyntaxError} 如果text参数不是有效的JSON字符串则会抛异常
-		 * @example 
+		 * @example
 var str = '{"key1":1,"key2":{"key21":2}}';
 var obj = JSON.parse(str,function(k,v){
 	if( k == 'key21' ) return 'hello world';
@@ -31,7 +31,7 @@ var obj = JSON.parse(str,function(k,v){
 });
 alert(obj.key2.key21) //hello world
 		 */
-		parse: (function(){			
+		parse: (function(){
 			/*
 			 * 匹配特殊字符的正则表达式，如果在text中出现这些字符均会被替换成Unicode编码的字符串
 			 */
@@ -74,7 +74,7 @@ alert(obj.key2.key21) //hello world
 					rev = reviver;
 					return typeof reviver === 'function' ? traver('', { '': obj }) : obj;
 				}
-				
+
 				/*无效的JSON格式*/
 				throw new SyntaxError('Invalid JSON format in executing JSON.parse');
 			};
@@ -88,14 +88,14 @@ alert(obj.key2.key21) //hello world
 		 * @param {String} spacer (Optional) 用于格式化输出结果，如果是数字则表示缩进的空格个数，如果是字符串则表示用于缩进填充的字符串
 		 * @return {String} 返回序列化后的数组
 		 * @throw {Error} 如果replacer非空并且既不是数组也不是函数时会抛出异常
-		 * @example 
+		 * @example
 //1.简单用法
 var obj = {key1:{key11:[1,2,3,4]}};
 var objString = JSON.stringify(obj);//'{"key1":{"key11":[1,2,3,4]}}'
 //2.自定义toJSON（支持Date、String、Number、Boolean类型）
 Date.prototype.toJSON = function(){
 	return 'test date';
-};			
+};
 var d = new Date();
 var obj = {date:d};
 var objString = JSON.stringify(obj);//'{"date":"test date"}'
@@ -149,7 +149,7 @@ var objString = JSON.stringify(obj,['key2','key3']);//'{"key2":1,"key3":1}'
 				'"' : '\\"',
 				'\\': '\\\\'
 			};
-			
+
 			/*如果字符串中不包含引号、转义字符、反斜杠则可以直接添加引号，否则需要进行替换处理后才可以添加引号。*/
 			function addQuote( str ){
 				escapable.lastIndex = 0;
@@ -192,9 +192,9 @@ var objString = JSON.stringify(obj,['key2','key3']);//'{"key2":1,"key3":1}'
 						for( var i = 0, len = v.length; i < len ; i++){
 							res[i] = getString( i , v ) || 'null';
 						}
-						
-						var r = res.length == 0 ? '[]' : 
-								gap ? '[\n' + 
+
+						var r = res.length == 0 ? '[]' :
+								gap ? '[\n' +
 								gap + res.join(',\n' + gap) + '\n' +
                                 lastGap + ']' :
 									'[' + res.join(',') + ']';
@@ -223,8 +223,8 @@ var objString = JSON.stringify(obj,['key2','key3']);//'{"key2":1,"key3":1}'
 									}
 							}
 						}
-						var r = res.length == 0 ? '{}' : 
-								gap ? '{\n' + 
+						var r = res.length == 0 ? '{}' :
+								gap ? '{\n' +
 								gap + res.join(',\n' + gap) + '\n' +
                                 lastGap + '}' :
 									'{' + res.join(',') + '}';

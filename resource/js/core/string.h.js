@@ -13,7 +13,7 @@
 (function(){
 
 var StringH = {
-	/** 
+	/**
 	* 除去字符串两边的空白字符
 	* @method trim
 	* @static
@@ -25,7 +25,7 @@ var StringH = {
 	trim:function(s){
 		return s.replace(/^[\s\xa0\u3000]+|[\u3000\xa0\s]+$/g, "");
 	},
-	/** 
+	/**
 	* 对一个字符串进行多次replace
 	* @method mulReplace
 	* @static
@@ -38,7 +38,7 @@ var StringH = {
 		for(var i=0;i<arr.length;i++) s=s.replace(arr[i][0],arr[i][1]);
 		return s;
 	},
-	/** 
+	/**
 	* 字符串简易模板
 	* @method format
 	* @static
@@ -52,7 +52,7 @@ var StringH = {
 		return s.replace(/\{(\d+)\}/ig,function(a,b){return args[b*1+1]||''});
 	},
 
-	/** 
+	/**
 	* 字符串简易模板
 	* @method tmpl
 	* @static
@@ -65,7 +65,7 @@ var StringH = {
 		return sTmpl.replace(/\{\$(\w+)\}/g,function(a,b){return opts[b]});
 	},
 
-	/** 
+	/**
 	* 判断一个字符串是否包含另一个字符串
 	* @method contains
 	* @static
@@ -78,16 +78,16 @@ var StringH = {
 		return s.indexOf(subStr)>-1;
 	},
 
-	/** 
+	/**
 	* 全角字符转半角字符
 		全角空格为12288，转化成" "；
 		全角句号为12290，转化成"."；
-		其他字符半角(33-126)与全角(65281-65374)的对应关系是：均相差65248 
+		其他字符半角(33-126)与全角(65281-65374)的对应关系是：均相差65248
 	* @method dbc2sbc
 	* @static
 	* @param {String} s 需要处理的字符串
 	* @return {String}  返回转化后的字符串
-	* @example 
+	* @example
 		var s="发票号是ＢＢＣ１２３４５６，发票金额是１２.３５元";
 		alert(dbc2sbc(s));
 	*/
@@ -100,7 +100,7 @@ var StringH = {
 		]);
 	},
 
-	/** 
+	/**
 	* 得到字节长度
 	* @method byteLen
 	* @static
@@ -112,7 +112,7 @@ var StringH = {
 		return s.replace(/[^\x00-\xff]/g,"--").length;
 	},
 
-	/** 
+	/**
 	* 得到指定字节长度的子字符串
 	* @method subByte
 	* @static
@@ -132,7 +132,7 @@ var StringH = {
 			.replace(/([^\x00-\xff]) /g,"$1") + tail;//还原
 	},
 
-	/** 
+	/**
 	* 驼峰化字符串。将“ab-cd”转化为“abCd”
 	* @method camelize
 	* @static
@@ -143,7 +143,7 @@ var StringH = {
 		return s.replace(/\-(\w)/ig,function(a,b){return b.toUpperCase();});
 	},
 
-	/** 
+	/**
 	* 反驼峰化字符串。将“abCd”转化为“ab-cd”。
 	* @method decamelize
 	* @static
@@ -154,13 +154,13 @@ var StringH = {
 		return s.replace(/[A-Z]/g,function(a){return "-"+a.toLowerCase();});
 	},
 
-	/** 
+	/**
 	* 字符串为javascript转码
 	* @method encode4Js
 	* @static
 	* @param {String} s 字符串
 	* @return {String} 返回转化后的字符串
-	* @example 
+	* @example
 		var s="my name is \"JK\",\nnot 'Jack'.";
 		window.setTimeout("alert('"+encode4Js(s)+"')",10);
 	*/
@@ -176,7 +176,7 @@ var StringH = {
 		]);
 	},
 
-	/** 
+	/**
 	* 为http的不可见字符、不安全字符、保留字符作转码
 	* @method encode4Http
 	* @static
@@ -187,13 +187,13 @@ var StringH = {
 		return s.replace(/[\u0000-\u0020\u0080-\u00ff\s"'#\/\|\\%<>\[\]\{\}\^~;\?\:@=&]/,function(a){return encodeURIComponent(a)});
 	},
 
-	/** 
+	/**
 	* 字符串为Html转码
 	* @method encode4Html
 	* @static
 	* @param {String} s 字符串
 	* @return {String} 返回处理后的字符串
-	* @example 
+	* @example
 		var s="<div>dd";
 		alert(encode4Html(s));
 	*/
@@ -204,7 +204,7 @@ var StringH = {
 		return el.innerHTML;
 	},
 
-	/** 
+	/**
 	* 字符串为Html的value值转码
 	* @method encode4HtmlValue
 	* @static
@@ -218,7 +218,7 @@ var StringH = {
 		return StringH.encode4Html(s).replace(/"/g,"&quot;").replace(/'/g,"&#039;");
 	},
 
-	/** 
+	/**
 	* 与encode4Html方法相反，进行反编译
 	* @method decode4Html
 	* @static
@@ -230,7 +230,7 @@ var StringH = {
 		div.innerHTML = s.stripTags();
 		return div.childNodes[0] ? div.childNodes[0].nodeValue+'' : '';
 	},
-	/** 
+	/**
 	* 将所有tag标签消除，即去除<tag>，以及</tag>
 	* @method stripTags
 	* @static
@@ -240,7 +240,7 @@ var StringH = {
 	stripTags:function(s) {
 		return s.replace(/<[^>]*>/gi, '');
 	},
-	/** 
+	/**
 	* eval某字符串。如果叫"eval"，在这里需要加引号，才能不影响YUI压缩。不过其它地方用了也会有问题，所以改名evalJs，
 	* @method evalJs
 	* @static
@@ -251,7 +251,7 @@ var StringH = {
 	evalJs:function(s,opts) { //如果用eval，在这里需要加引号，才能不影响YUI压缩。不过其它地方用了也会有问题，所以改成evalJs，
 		return new Function("opts",s)(opts);
 	},
-	/** 
+	/**
 	* eval某字符串，这个字符串是一个js表达式，并返回表达式运行的结果
 	* @method evalExp
 	* @static

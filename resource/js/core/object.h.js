@@ -49,7 +49,7 @@ var ObjectH = {
 		return type;
 	},
 
-	/** 
+	/**
 	* 将源对象的属性并入到目标对象
 	* @method mix
 	* @static
@@ -122,13 +122,13 @@ var ObjectH = {
 		}
 		return ret;
 	},
-	/** 
+	/**
 	* 序列化一个对象(只序列化String,Number,Boolean,Date,Array,Json对象和有toJSON方法的对象,其它的对象都会被序列化成null)
 	* @method stringify
 	* @static
 	* @param {Object} obj 需要序列化的Json、Array对象或其它对象
 	* @returns {String} : 返回序列化结果
-	* @example 
+	* @example
 		var card={cardNo:"bbbb1234",history:[{date:"2008-09-16",count:120.0,isOut:true},1]};
 		alert(stringify(card));
 	*/
@@ -140,7 +140,7 @@ var ObjectH = {
 		var type=ObjectH.getType(obj);
 		switch(type){
 			case 'string': return '"'+encode4Js(obj)+'"';
-			case 'number': 
+			case 'number':
 			case 'boolean': return obj+'';
 			case 'date': return 'new Date(' + obj.getTime() + ')';
 			case 'array' :
@@ -157,32 +157,32 @@ var ObjectH = {
 		return null;//无法序列化的，返回null;
 	},
 
-	/** 
+	/**
 	* 为一个对象设置属性
 	* @method set
 	* @static
 	* @param {Object} obj 目标对象
 	* @param {string} prop 属性名
 	* @param {any} value 属性值
-	* @returns {void} 
+	* @returns {void}
 	*/
 	set:function (obj,prop,value){
 		obj[prop]=value;
 	},
 
-	/** 
+	/**
 	* 获取一个对象的属性值:
 	* @method set
 	* @static
 	* @param {Object} obj 目标对象
 	* @param {string} prop 属性名
-	* @returns {any} 
+	* @returns {any}
 	*/
 	get:function (obj,prop){
 		return obj[prop];
 	},
 
-	/** 
+	/**
 	* 为一个对象设置属性，支持以下三种调用方式:
 		setEx(obj, prop, value)
 		setEx(obj, propJson)
@@ -193,11 +193,11 @@ var ObjectH = {
 	* @param {Object} obj 目标对象
 	* @param {string|Json|Array} prop 如果是string,则当属性名(属性名可以是属性链字符串,如"style.display")，如果是Json，则当prop/value对。如果是数组，则当prop数组，第二个参数对应的也是value数组
 	* @param {any | Array} value 属性值
-	* @returns {Object} obj 
-	* @example 
+	* @returns {Object} obj
+	* @example
 		var el={style:{},firstChild:{}};
 		setEx(el,"id","aaaa");
-		setEx(el,{className:"cn1", 
+		setEx(el,{className:"cn1",
 			"style.display":"block",
 			"style.width":"8px"
 		});
@@ -226,7 +226,7 @@ var ObjectH = {
 		return obj;
 	},
 
-	/** 
+	/**
 	* 得到一个对象的相关属性，支持以下三种调用方式:
 		getEx(obj, prop) -> obj[prop]
 		getEx(obj, props) -> propValues
@@ -238,7 +238,7 @@ var ObjectH = {
 		如果是Array，则当props看待
 	* @param {boolean} returnJson 是否需要返回Json对象
 	* @returns {any|Array|Json} 返回属性值
-	* @example 
+	* @example
 		getEx(obj,"style"); //返回obj["style"];
 		getEx(obj,"style.color"); //返回 obj.style.color;
 		getEx(obj,"style.color",true); //返回 {"style.color":obj.style.color};

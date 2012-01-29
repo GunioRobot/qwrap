@@ -1,4 +1,4 @@
-/** 
+/**
 * @class EventH Event Helper，处理一些Event对象兼容问题
 * @singleton
 * @helper
@@ -20,7 +20,7 @@ QW.EventH = function () {
 
 	var EventH = {
 
-		/** 
+		/**
 		* 获取鼠标位于完整页面的X坐标
 		* @method	pageX
 		* @param	{event}		event	(Optional)event对象 默认为调用位置所在宿主的event
@@ -33,7 +33,7 @@ QW.EventH = function () {
 			return ('pageX' in e) ? e.pageX : (e.clientX + (doc.documentElement.scrollLeft || doc.body.scrollLeft) - 2);
 		}
 
-		/** 
+		/**
 		* 获取鼠标位于完整页面的Y坐标
 		* @method	pageY
 		* @param	{event}		event	(Optional)event对象 默认为调用位置所在宿主的event
@@ -45,8 +45,8 @@ QW.EventH = function () {
 				, doc = getDoc(e);
 			return ('pageY' in e) ? e.pageY : (e.clientY + (doc.documentElement.scrollTop || doc.body.scrollTop) - 2);
 		}
-		
-		/** 
+
+		/**
 		* 获取鼠标距离触发事件对象顶端X坐标
 		* @method	layerX
 		* @param	{event}		event	(Optional)event对象 默认为调用位置所在宿主的event
@@ -57,9 +57,9 @@ QW.EventH = function () {
 			return ('layerX' in e) ? e.layerX : e.offsetX;
 		}
 		*/
-		
-		
-		/** 
+
+
+		/**
 		* 获取鼠标距离触发事件对象顶端Y坐标
 		* @method	layerY
 		* @param	{event}		event	(Optional)event对象 默认为调用位置所在宿主的event
@@ -70,9 +70,9 @@ QW.EventH = function () {
 			return ('layerY' in e) ? e.layerY : e.offsetY;
 		}
 		*/
-		
-		
-		/** 
+
+
+		/**
 		* 获取鼠标滚轮方向
 		* @method	detail
 		* @param	{event}		event	(Optional)event对象 默认为调用位置所在宿主的event
@@ -83,8 +83,8 @@ QW.EventH = function () {
 			var e = EventH.getEvent.apply(EventH, arguments);
 			return e.detail || -(e.wheelDelta || 0);
 		}
-		
-		/** 
+
+		/**
 		* 获取触发事件的按键对应的ascii码
 		* @method	keyCode
 		* @param	{event}		event	(Optional)event对象 默认为调用位置所在宿主的event
@@ -95,8 +95,8 @@ QW.EventH = function () {
 			var e = EventH.getEvent.apply(EventH, arguments);
 			return ('keyCode' in e) ? e.keyCode : (e.charCode || e.which || 0);
 		}
-		
-		/** 
+
+		/**
 		* 阻止事件冒泡
 		* @method	stopPropagation
 		* @param	{event}		event	(Optional)event对象 默认为调用位置所在宿主的event
@@ -108,8 +108,8 @@ QW.EventH = function () {
 			if (e.stopPropagation) e.stopPropagation();
 			else e.cancelBubble = true;
 		}
-		
-		/** 
+
+		/**
 		* 阻止事件默认行为
 		* @method	preventDefault
 		* @param	{event}		event	(Optional)event对象 默认为调用位置所在宿主的event
@@ -121,8 +121,8 @@ QW.EventH = function () {
 			if (e.preventDefault) e.preventDefault();
 			else e.returnValue = false;
 		}
-		
-		/** 
+
+		/**
 		* 获取事件触发时是否持续按住ctrl键
 		* @method	ctrlKey
 		* @param	{event}		event	(Optional)event对象 默认为调用位置所在宿主的event
@@ -133,8 +133,8 @@ QW.EventH = function () {
 			var e = EventH.getEvent.apply(EventH, arguments);
 			return e.ctrlKey;
 		}
-		
-		/** 
+
+		/**
 		* 事件触发时是否持续按住shift键
 		* @method	shiftKey
 		* @param	{event}		event	(Optional)event对象 默认为调用位置所在宿主的event
@@ -145,8 +145,8 @@ QW.EventH = function () {
 			var e = EventH.getEvent.apply(EventH, arguments);
 			return e.shiftKey;
 		}
-		
-		/** 
+
+		/**
 		* 事件触发时是否持续按住alt键
 		* @method	altKey
 		* @param	{event}		event	(Optional)event对象 默认为调用位置所在宿主的event
@@ -157,8 +157,8 @@ QW.EventH = function () {
 			var e = EventH.getEvent.apply(EventH, arguments);
 			return e.altKey;
 		}
-		
-		/** 
+
+		/**
 		* 触发事件的元素
 		* @method	target
 		* @param	{event}		event	(Optional)event对象 默认为调用位置所在宿主的event
@@ -172,8 +172,8 @@ QW.EventH = function () {
 			if (node.nodeType == 3) node = node.parentNode;
 			return node;
 		}
-		
-		/** 
+
+		/**
 		* 获取元素
 		* @method	target
 		* @param	{event}		event	(Optional)event对象 默认为调用位置所在宿主的event
@@ -188,7 +188,7 @@ QW.EventH = function () {
 			return null;
 		}
 
-		/** 
+		/**
 		* 获得event对象
 		* @method	target
 		* @param	{event}		event	(Optional)event对象 默认为调用位置所在宿主的event

@@ -109,7 +109,7 @@ Ajax.opResults = function(Results, url) {
 					alert('您需要登录后才能继续刚才的操作！');
 				}
 			}
- 		break; 		
+ 		break;
 		case "mcphp.u_power":
  			window.location ="http://co.youa.baidu.com/content/misc/err/nopower/index.html";
  		break;
@@ -124,12 +124,12 @@ Ajax.opResults = function(Results, url) {
 };
 
 (function() {
-	var QW = window.QW, 
-		mix = QW.ObjectH.mix, 
-		HH = QW.Helper, 
+	var QW = window.QW,
+		mix = QW.ObjectH.mix,
+		HH = QW.Helper,
 		DOM = QW.Dom,
 		NodeW = QW.NodeW,
-		applyTo = HH.applyTo, 
+		applyTo = HH.applyTo,
 		methodizeTo = HH.methodizeTo;
 
 	var FormH = {
@@ -167,7 +167,7 @@ Ajax.opResults = function(Results, url) {
 						if( r === false )
 							return;
 					}
-			
+
 					if( result.isop ) return;
 					//如果有自定义错误、提示对照表，则执行
 					if( o.errors ){
@@ -185,7 +185,7 @@ Ajax.opResults = function(Results, url) {
 				e.preventDefault();
 				//如果设置了需要验证，则进行表单验证
 				if( o.validate && !Valid.checkAll(this))
-					return;	
+					return;
 				//执行发送请求前的自定义函数，并且根据返回结果来决定是否需要继续执行
 				if( o.before && !o.before(this)) return;
 				Ajax.post(this,o.success);
@@ -198,7 +198,7 @@ Ajax.opResults = function(Results, url) {
 			return Ajax.post($(oForm),o.success);
 		}*/
 	};
-	
+
 
 
 	FormH = HH.mul(FormH);

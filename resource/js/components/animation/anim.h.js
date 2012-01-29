@@ -1,10 +1,10 @@
 (function() {
-	var QW = window.QW, 
-		mix = QW.ObjectH.mix, 
-		HH = QW.HelperH, 
+	var QW = window.QW,
+		mix = QW.ObjectH.mix,
+		HH = QW.HelperH,
 		DOM = QW.Dom,
 		NodeW = QW.NodeW,
-		applyTo = HH.applyTo, 
+		applyTo = HH.applyTo,
 		methodizeTo = HH.methodizeTo;
 
 	var AnimH = (function(){

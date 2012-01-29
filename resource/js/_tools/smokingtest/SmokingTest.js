@@ -5,19 +5,19 @@ var TestU={};
 TestU.analyseStr =function (sKeys){
 	/*
 	把一个字符串当作js来运行，并解析其结果：
-	@param {String} sKeys 变量名 
-	@param {boolean} asObj 如果为true，则将sKeys当作一个变量来处理 
+	@param {String} sKeys 变量名
+	@param {boolean} asObj 如果为true，则将sKeys当作一个变量来处理
 	@returns {Json} 返回分析结果，分析结果包括：
 		{String} sKeys 即sKeys
 		{String} sNameSpace sKeys的左边部分
-		{String} lastKey sKeys的最后一个key 
+		{String} lastKey sKeys的最后一个key
 		{Object} value 返回其值
 		{boolean} hasChildren 是否有children
 		{String} type 数据类型，包括：null/undefined/number/string/boolean/object/function，另外多一个error
 		{String} sConstructor 构造函数：null/undefined/number/string/boolean
 				/Object/Array/String/Number...
 				/Element/Event
-		{String} summary 主要信息 
+		{String} summary 主要信息
 				对于Array，返回前三个对象的sConstructor,以及总长度
 				对于Object，返回前三个对象的key,sConstructor,以及总长度
 				对于Element，返回tagName#id.className,
@@ -53,7 +53,7 @@ TestU.analyseStr =function (sKeys){
 TestU.analyse =function (value){
 	/*
 	解析一个变量
-	@param {String} value 变量名 
+	@param {String} value 变量名
 	@returns {Json} 返回分析结果，分析结果包括：
 		{Object} value 返回其值
 		{boolean} hasChildren 是否有children
@@ -61,7 +61,7 @@ TestU.analyse =function (value){
 		{String} sConstructor 构造函数：null/undefined/number/string/boolean
 				/Object/Array/String/Number...
 				/Element/Event
-		{String} summary 主要信息 
+		{String} summary 主要信息
 				对于Array，返回前三个对象的sConstructor,以及总长度
 				对于Object，返回前三个对象的key,sConstructor,以及总长度
 				对于Element，返回tagName#id.className,
@@ -91,7 +91,7 @@ TestU.analyse =function (value){
 				else{
 					sConstructor=trim((constructor+"").split("(")[0].replace("function",""));
 				}
-				
+
 				//得到summary
 				if(nodeType=="1"){//HTML Element
 					summary=value.tagName+(value.id?"#"+value.id:"")+(value.className?"."+value.className:"");
@@ -162,7 +162,7 @@ TestU.analyse =function (value){
 TestU.stringify = function (val){
 	/*
 	* 返回对val的描述。
-	* @param {any} val 分析对象 
+	* @param {any} val 分析对象
 	* @returns {string} 返回分析结果
 	*/
 	var info=TestU.analyse(val);
@@ -227,7 +227,7 @@ SmokingTest.init =function (ctn, varsArr, codeStr){
 			'</td></tr></table>'
 			].join('');
 		ctn.innerHTML=html;
-		
+
 		//为几个元素添加事件
 		varEl=$("ST_var");
 		jscodeEl=$("ST_jscode");
@@ -252,7 +252,7 @@ SmokingTest.dump=function(o){
 	/**
 	* print某个对象
 	* @namespace SmokingTest
-	* @method dump 
+	* @method dump
 	* @param {Object} o 待解析对象
 	*/
 	if(typeof o=="string") {
@@ -271,7 +271,7 @@ SmokingTest.addTreeItem=function(sKeys){
 	/**
 	* 将某个变量加到观测树里
 	* @namespace SmokingTest
-	* @method addTreeItem 
+	* @method addTreeItem
 	* @param {String} sKeys 变量名
 	*/
 	tree.addItem(sKeys);
@@ -351,7 +351,7 @@ Tree.prototype={
 		}
 		el.setAttribute("ST_sKeys",info.sKeys);
 		return el;
-		
+
 	},
 	addItem:function(sKeys,pEl) {
 		var info=analyseStr(sKeys);
@@ -361,7 +361,7 @@ Tree.prototype={
 	},
 	/**
 	 * openFolder(el): 展开一个folder
-	 * @param {Element} el: 
+	 * @param {Element} el:
 	 * @returns {void}
 	 */
 	openFolder:function(el) {
@@ -407,7 +407,7 @@ Tree.prototype={
 	},
 	/**
 	 * closeFolder(el): 关闭一个folder
-	 * @param {Element} el: 
+	 * @param {Element} el:
 	 * @returns {void}
 	 */
 	closeFolder:function(el) {
@@ -428,7 +428,7 @@ Tree.prototype={
 			//开启关闭folder
 			if(hasClass(el,"ST_img-closed")) tree.openFolder(el.parentNode);
 			else if(hasClass(el,"ST_img-open")) tree.closeFolder(el.parentNode);
-			
+
 			//ST.showJson该行对应的变量
 			if(el.tagName == "A"){
 				var liEl=ancestorNode(el,"LI");

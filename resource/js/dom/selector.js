@@ -65,7 +65,7 @@ var Selector={
 	/**
 	 * @property {Json} _attrGetters 常用的Element属性
 	 */
-	_attrGetters:function(){ 
+	_attrGetters:function(){
 		var o={'class': 'el.className',
 			'for': 'el.htmlFor',
 			'href':'el.getAttribute("href",2)'};
@@ -108,21 +108,21 @@ var Selector={
 			return null;
 		}
 	},
-	/** 
+	/**
 	 * 把一个selector字符串转化成一个过滤函数.
 	 * @method selector2Filter
 	 * @static
 	 * @param {string} sSelector 过滤selector，这个selector里没有关系运算符（", >+~"）
 	 * @returns {function} : 返回过滤函数。
-	 * @example: 
+	 * @example:
 		var fun=selector2Filter("input.aaa");alert(fun);
 	 */
 	selector2Filter:function(sSelector){
 		return s2f(sSelector);
 	},
-	/** 
+	/**
 	 * 判断一个元素是否符合某selector.
-	 * @method test 
+	 * @method test
 	 * @static
 	 * @param {HTMLElement} el: 被考察参数
 	 * @param {string} sSelector: 过滤selector，这个selector里没有关系运算符（", >+~"）
@@ -131,9 +131,9 @@ var Selector={
 	test:function(el,sSelector){
 		return s2f(sSelector)(el);
 	},
-	/** 
+	/**
 	 * 用一个css selector来过滤一个数组.
-	 * @method filter 
+	 * @method filter
 	 * @static
 	 * @param {Array|Collection} els: 元素数组
 	 * @param {string} sSelector: 过滤selector，这个selector里没有关系运算符（", >+~"）
@@ -144,14 +144,14 @@ var Selector={
 		var sltors=splitSelector(sSelector);
 		return filterByRelation(pEl||document.documentElement,els,sltors);
 	},
-	/** 
+	/**
 	 * 以refEl为参考，得到符合过滤条件的HTML Elements. refEl可以是element或者是document
 	 * @method query
 	 * @static
 	 * @param {HTMLElement} refEl: 参考对象
 	 * @param {string} sSelector: 过滤selector,
 	 * @returns {array} : 返回elements数组。
-	 * @example: 
+	 * @example:
 		var els=query(document,"li input.aaa");
 		for(var i=0;i<els.length;i++ )els[i].style.backgroundColor='red';
 	 */
@@ -214,7 +214,7 @@ var elContains,//部分浏览器不支持contains()，例如FF
 		function(pEl,el){ return (pEl.compareDocumentPosition(el) & 16);};
 	getChildren=div.children?
 		function(pEl){ return pEl.children;}:
-		function(pEl){ 
+		function(pEl){
 			return arrFilter(pEl.children,function(el){return el.tagName;});
 		};
 })();
@@ -275,7 +275,7 @@ function s2f(sSelector){
 	var reg=/\[\s*((?:[\w\u00c0-\uFFFF-]|\\.)+)\s*(?:(\S?=)\s*(['"]*)(.*?)\3|)\s*\]/g; //属性选择表达式解析,thanks JQuery
 	s=s.replace(reg,function(a,b,c,d,e){attrs.push([b,c||"",e||""]);return "";});//普通写法[foo][foo=""][foo~=""]等
 	if(!(/^\s*$/).test(s)) {
-		throw "Unsupported Selector:\n"+sSelector+"\n-"+s; 
+		throw "Unsupported Selector:\n"+sSelector+"\n-"+s;
 	}
 
 	//将以上解析结果，转化成过滤函数
@@ -320,7 +320,7 @@ function s2f(sSelector){
 	};
 };
 
-/* 
+/*
 	* {int} xxxStamp: 全局变量查询标记
  */
 var queryStamp=0,
@@ -328,10 +328,10 @@ var queryStamp=0,
 	querySimpleStamp=0;
 
 /*
-* nativeQuery(refEl,sSelector): 如果有原生的querySelectorAll，并且只是简单查询，则调用原生的query，否则返回null. 
+* nativeQuery(refEl,sSelector): 如果有原生的querySelectorAll，并且只是简单查询，则调用原生的query，否则返回null.
 * @param {Element} refEl 参考元素
 * @param {string} sSelector selector字符串
-* @returns 
+* @returns
 */
 function nativeQuery(refEl,sSelector){
 		if(hasNativeQuery && /^((^|,)\s*[.\w-][.\w\s\->+~]*)+$/.test(sSelector)) {
@@ -344,10 +344,10 @@ function nativeQuery(refEl,sSelector){
 		return null;
 };
 
-/* 
-* querySimple(pEl,sSelector): 得到pEl下的符合过滤条件的HTML Elements. 
+/*
+* querySimple(pEl,sSelector): 得到pEl下的符合过滤条件的HTML Elements.
 * sSelector里没有","运算符
-* pEl是默认是document.body 
+* pEl是默认是document.body
 * @see: query。
 */
 function querySimple(pEl,sSelector){
@@ -411,7 +411,7 @@ function querySimple(pEl,sSelector){
 		}
 	}
 	if(!sltorsLen || !pEls.length) return pEls;
-	
+
 	//次优先：idIdx查询
 	for(var idIdx=0,id;sltor=sltors[idIdx];idIdx++){
 		if((/^[.\w-]*#([\w-]+)/i).test(sltor[1])){
@@ -508,7 +508,7 @@ function splitSelector(sSelector){
 	var reg=/(^|\s*[>+~ ]\s*)(([\w\-\:.#*]+|\([^\)]*\)|\[\s*((?:[\w\u00c0-\uFFFF-]|\\.)+)\s*(?:(\S?=)\s*(['"]*)(.*?)\6|)\s*\])+)(?=($|\s*[>+~ ]\s*))/g;
 	var s=trim(sSelector).replace(reg,function(a,b,c,d){sltors.push([trim(b),c]);return "";});
 	if(!(/^\s*$/).test(s)) {
-		throw "Unsupported Selector:\n"+sSelector+"\n--"+s; 
+		throw "Unsupported Selector:\n"+sSelector+"\n--"+s;
 	}
 	return sltors;
 }
@@ -527,7 +527,7 @@ function filterByRelation(pEl,els,sltors){
 	var filters=[],
 		reations=[],
 		needNext=[];
-		
+
 	for(var i=0;i<len;i++){
 		sltor=sltors[i];
 		filters[i]=s2f(sltor[1]);//过滤

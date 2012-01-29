@@ -58,8 +58,8 @@ div
 					<ul id="selector_help" style='display:none;'>
 						<li>
 <pre>
-/** 
- * Selector.query(pEl,sSelector): 得到pEl下的符合过滤条件的HTML Elements. 
+/**
+ * Selector.query(pEl,sSelector): 得到pEl下的符合过滤条件的HTML Elements.
  * selector， 目前支持的运算符：
 	*	√
 	E	√
@@ -73,9 +73,9 @@ div
 	E[attr~=val]	√
 	E[attr|=val]	√
 	:first-child	√
-	:link 
-	:visited 
-	:lang()    
+	:link
+	:visited
+	:lang()
 	:before
 	::before
 	:after
@@ -90,7 +90,7 @@ div
 	E[attr$=val]	√
 	E[attr*=val]	√
 	E ~ F	√
-	:root 
+	:root
 	:last-child	√
 	:only-child	√
 	:nth-child()	√
@@ -102,7 +102,7 @@ div
 	:nth-last-of-type()	√
 	:empty	√
 	:not()	√
-	:target 
+	:target
 	:enabled	√
 	:disabled	√
 	:checked	√
@@ -111,12 +111,12 @@ div
 	:parent	√
 	--------------------------
 	示例：
-	"ul li" 
+	"ul li"
 	">ul li"
 	"ul li:first-child"
 	"li:nth-child(2n)"----nth支持参数如：'even', 'odd', '5', '2n', '3n+2', '4n-1', '-n+6'
- * @param {HTMLElement} pEl: 容器对象 
- * @returns {array} : 返回elements数组。 
+ * @param {HTMLElement} pEl: 容器对象
+ * @returns {array} : 返回elements数组。
  */
 
  /*

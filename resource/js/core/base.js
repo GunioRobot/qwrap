@@ -4,7 +4,7 @@
 
 (function(){
 /**
-* @singleton 
+* @singleton
 * @class QW QW框架的根命名空间
 */
 
@@ -35,8 +35,8 @@ var QW = {
 	 * @static
 	 * @param {string|Json} key 如果类型为string，则为key，否则为Json，表示将该Json里的值dump到QW命名空间
 	 * @param {any} value (Optional)值
-	 * @return {void} 
-	 */		
+	 * @return {void}
+	 */
 	provide: function(key, value){
 		if(arguments.length==1 && typeof key=='object'){
 			for(var i in key){

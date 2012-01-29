@@ -27,7 +27,7 @@
 		this.workers = [];
 		/**
 		 * @property running 当前队列的状态
-		 * @type {Boolean} 
+		 * @type {Boolean}
 		 */
 		this.running = false;
 	}
@@ -79,7 +79,7 @@
 	/**
 	 * @property types 队列模式<br>LINE:顺序的发送请求，每个请求在前一个请求结束后才发送;<br>DROP:新的请求在发送前，会终止旧的未完成的请求
 	 * @type {Object}
-	 */		
+	 */
 	Queue.types = {
 		//顺序的发送请求，每个请求在前一个请求结束后才发送
 		LINE:	1,

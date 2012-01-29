@@ -123,12 +123,12 @@
 		 * @property options 静态全局配置
 		 * @type Object
 		 */
-		options: {			
+		options: {
 			useXHRPool:	false
 		},
         /**
          * 获取XMLHttpRequest对象
-		 * @method 
+		 * @method
 		 * @static
 		 * @return {XMLHTTPRequest}
          */
@@ -274,7 +274,7 @@
          */
         isSuccess: function( xhr ){
             var status = xhr.status;
-            return !status || (status >= 200 && status < 300) || status == 304;           
+            return !status || (status >= 200 && status < 300) || status == 304;
         },
         /**
          * 判断一个请求是否是否正在请求中
@@ -285,7 +285,7 @@
          */
         isProcessing: function( xhr ){
             var state = xhr.readyState;
-            return state > 0 && state < 4;           
+            return state > 0 && state < 4;
         },
         /**
          * 序列化一个JSON对象
@@ -305,18 +305,18 @@
             	var tdata = [];
 		    	for( var p in param ){
 			    	if(param[p] == null) continue;
-			    	if(param[p].constructor == Array) 
+			    	if(param[p].constructor == Array)
 			    	{
-				    	for (var i=0;i < param[p].length;i++) 
+				    	for (var i=0;i < param[p].length;i++)
 							tdata.push( encodeURIComponent(p) + "=" + encodeURIComponent(param[p][i]));
 			    	}
-			    	else 
+			    	else
 				    	tdata.push( encodeURIComponent(p) + "=" + encodeURIComponent(param[p]));
 		    	}
 				return tdata.join("&");
 			}
 			return '';
-        }       
+        }
     } );
     /*
      * 成员方法
@@ -326,7 +326,7 @@
         /*
          * 设置请求头
          * @private
-         */   
+         */
         _setRequestHeaders:  function(){
             var headers = {"x-baidu-ie":"utf-8","x-baidu-rf":"json"};
 	        //设置Content Type以及charset
@@ -341,7 +341,7 @@
 		        this._xhr.setRequestHeader( i, headers[i] );
 	        }
         },
-        /** 
+        /**
          * 发送请求
          * @method
          * @param {String} url 请求的地址
@@ -377,7 +377,7 @@
 				url = url.indexOf('?') != -1 ? url + '&' + param : url + '?' + param;
 				return url;
 			}
-            
+
             if(data && method.toLowerCase() == 'get'){
 		    	url = addParam(url,data);
 			}
@@ -426,7 +426,7 @@
 								clearTimeout(me._timer);
 							done = true;
 							if( ops.label && ops.onerror ){
-								try{	
+								try{
 									QW.StringH.evalJs(ops.label);
 									me._handleComplete( Ajax.STATE_JSSUCCESS );
 								}
@@ -478,10 +478,10 @@
             //设置请求头
             this._setRequestHeaders();
 
-            if( data && method.toLowerCase() == "post" )	
+            if( data && method.toLowerCase() == "post" )
 		        this._xhr.send( data );
 	        else
-		        this._xhr.send( null );	
+		        this._xhr.send( null );
             if( ops.timeout > 0 && ops.async )
                 this._checkTimeout();
 			//如果是同步调用则在send完成后调用_handleComplete进行处理
@@ -493,7 +493,7 @@
          * 请求完成后的回调处理
          * @private
          * @param { Integer } state: 需要进行处理的状态
-         */   
+         */
         _handleComplete: function( state,data ){
 			this.completed = true;
             var ops = this.ops;
@@ -564,7 +564,7 @@
                    if( Ajax.isProcessing( me._xhr ) ){
                         me._abortXHR();
                         me._handleComplete( Ajax.STATE_TIMEOUT );
-                   }        
+                   }
                 }
                 ,this.ops.timeout);
             }
@@ -578,7 +578,7 @@
                 this._byCanceled = true;
                 this._xhr.abort();
                 this._handleComplete( Ajax.STATE_CANCEL );
-            }           
+            }
         },
         /**
          * 取消请求
@@ -596,7 +596,7 @@
 				,ops.timeout);
 			}
 			if( QW.Env.ie ){
-				var frag = document.createDocumentFragment(), 
+				var frag = document.createDocumentFragment(),
 					script = document.createElement('script');
 				function clearIE(){
 					frag = script = script.onreadystatechange = frag[jsonp] = null;
@@ -606,7 +606,7 @@
 				frag[jsonp] = function (data) {
 					if( me._timer )
 						clearTimeout(me._timer);
-					/*调用用户传入的callback*/					
+					/*调用用户传入的callback*/
 					me._handleComplete( Ajax.STATE_JSSUCCESS,data );
 					/*使用完成后清除垃圾信息*/
 					clearIE();
@@ -630,7 +630,7 @@
 					iframe.src = 'about:blank', iframe.parentNode.removeChild(iframe), iframe = null;
 				}
 				var charset = ops.scriptCharset;
-				
+
 				/*在iframe的frameElement上定义callback*/
 				iframe.callback = function (data) {
 					if( me._timer )
@@ -645,18 +645,18 @@
 				try {
 					document.body.appendChild(iframe);
 					var doc = iframe.contentWindow.document;
-					
+
 					/*在iframe内容中定义真是的callback函数，以供正确请求到数据后进行响应，如果正确地请求到数据则会执行success回调并删除对错误的响应函数*/
-					var content = 
+					var content =
 						'<script type="text\/javascript">function ' + jsonp + '(data) { window.frameElement.callback(data); }<\/script>';
 					/*写入script标签请求数据*/
 					if( charset )
-						content += 
+						content +=
 						'<script type="text\/javascript" src="' + url + '" charset="' + charset + '"><\/script>';
-					else						
-						content += 
+					else
+						content +=
 						'<script type="text\/javascript" src="' + url + '"><\/script>';
-					content += 
+					content +=
 						'<script type="text\/javascript">window.setTimeout("try { window.frameElement.errorcallback(); } catch (exp) {}", 1)<\/script>';
 					doc.open();
 					doc.write(content);

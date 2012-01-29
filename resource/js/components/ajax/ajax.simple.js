@@ -27,7 +27,7 @@
 		*| useLock:			|	是否使用锁机制			|	0								|
 		*| timeout:			|	设置请求超时的时间（ms）|	30000							|
 		*------------------------------------------------------------------------------------
-	* @return {Ajax} : 
+	* @return {Ajax} :
 	* @constructor
 	*/
 	function Ajax( options ){
@@ -45,14 +45,14 @@
 		STATE_ERROR:    3,
 		STATE_TIMEOUT:  4,
 		STATE_CANCEL:   5,
-		/** 
+		/**
 		* defaultHeaders: 默认的requestHeader信息
 		*/
 		defaultHeaders:{
 			'Content-type':'application/x-www-form-urlencoded UTF-8',//最常用配置
 			'com-info-1':'QW'//根具体应用有关的header信息
 		},
-		/** 
+		/**
 		* EVENTS: Ajax的CustEvents
 		*/
 		EVENTS:['send','succeed','error','cancel','complete'],
@@ -60,7 +60,7 @@
 		*XHRVersions: IE下XMLHttpRequest的版本
 		*/
 		XHRVersions:['MSXML2.XMLHttp.6.0', 'MSXML2.XMLHttp.3.0', 'MSXML2.XMLHttp.5.0', 'MSXML2.XMLHttp.4.0', 'Msxml2.XMLHTTP','MSXML.XMLHttp','Microsoft.XMLHTTP'],
-		/** 
+		/**
 		* getXHR(): 得到一个XMLHttpRequest对象
 		* @returns {XMLHttpRequest} : 返回一个XMLHttpRequest对象。
 		*/
@@ -81,7 +81,7 @@
 			}
 			return null;
 		},
-		/** 
+		/**
 		* encodeURIJson(data): encodeURI一个Json对象
 		* @param {Json} data: Json数据
 		* @returns {string} : 返回被encodeURI了的Json。
@@ -120,7 +120,7 @@
 		//私有变量｜readOnly变量
 		isLocked :	0,	//处于锁定状态
 		state :	Ajax.STATE_INIT,	//处于锁定状态
-		/** 
+		/**
 		* send( url, method, data ): 发送请求
 		* @param {string} url: 请求的url
 		* @param {string} method: 传送方法，get/post
@@ -141,7 +141,7 @@
 			url = url || me.url;
 			method = (method || me.method).toLowerCase();
 			data = data || me.data;
-			
+
 			if( typeof data == 'object' )	{
 				if(data.tagName='FORM') data=Dom.encodeURIForm(data); //data是Form HTMLElement
 				else data = Ajax.encodeURIJson(data); //data是Json数据
@@ -150,7 +150,7 @@
 			//如果是get方式请求，则传入的数据必须是'key1=value1&key2=value2'格式的。
 			if(data && method == 'get')
 					url += (url.indexOf('?') != -1?'&':'?') + data ;
-			if( me.user)		
+			if( me.user)
 				requester.open(method,url,me.async,me.user,me.pwd );
 			else
 				requester.open(method,url,me.async);
@@ -180,7 +180,7 @@
 			else
 				requester.send(null);
 		},
-		/** 
+		/**
 		* isSuccess(): 判断现在的状态是否是“已请求成功”
 		* @returns {boolean} : 返回XMLHttpRequest是否成功请求。
 		*/
@@ -188,7 +188,7 @@
             var status = this.requester.status;
             return !status || (status >= 200 && status < 300) || status == 304;
 		},
-		/** 
+		/**
 		* isProcessing(): 判断现在的状态是否是“正在请求中”
 		* @returns {boolean} : 返回XMLHttpRequest是否正在请求。
 		*/
@@ -196,7 +196,7 @@
 			var state = this.requester?this.requester.readyState:0;
 			return state > 0 && state < 4;
 		},
-		/** 
+		/**
 		* get(url,data): 用get方式发送请求
 		* @param {string} url: 请求的url
 		* @param {string|jason|FormElement} data: 可以是字符串，也可以是Json对象，也可以是FormElement
@@ -206,7 +206,7 @@
 		get: function(url,data){
 			this.send(url,'get',data);
 		},
-		/** 
+		/**
 		* get(url,data): 用post方式发送请求
 		* @param {string} url: 请求的url
 		* @param {string|jason|FormElement} data: 可以是字符串，也可以是Json对象，也可以是FormElement
@@ -216,7 +216,7 @@
 		post: function(url,data){
 			this.send(url,'post',data);
 		},
-		/** 
+		/**
 		* cancel(): 取消请求
 		* @returns {boolean}: 是否有取消动作发生（因为有时请求已经发出，或请求已经成功）
 		*/
@@ -231,9 +231,9 @@
 			}
 			return false;
 		 },
-		/** 
+		/**
 		* _initialize(): 对一个Ajax进行初始化
-		* @returns {void}: 
+		* @returns {void}:
 		*/
 		_initialize: function(){
 			var me=this;
@@ -242,9 +242,9 @@
 			me.requestHeaders=mix(me.requestHeaders||{},Ajax.defaultHeaders);
 
 		},
-		/** 
+		/**
 		* _checkTimeout(): 监控是否请求超时
-		* @returns {void}: 
+		* @returns {void}:
 		*/
 		_checkTimeout: function(){
 			var me = this;
@@ -261,9 +261,9 @@
 				}, me.timeout);
 			}
 		},
-		/** 
+		/**
 		* _execComplete(): 执行请求完成的操作
-		* @returns {void}: 
+		* @returns {void}:
 		*/
 		_execComplete: function(){
 			var me=this;

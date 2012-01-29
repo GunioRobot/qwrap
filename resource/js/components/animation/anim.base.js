@@ -72,7 +72,7 @@
 				if(!this.effect) {
 					var me = this;
 					this.effect = new QW.Effect(function(per){
-						me.onTween(per);	
+						me.onTween(per);
 					}, this.dur);
 					Anim.EVENTS.forEach(function(evt) {
 						me.effect.on(evt,function() {
@@ -95,7 +95,7 @@
 
 			/**
 			 * 数据的初始化
-			 * 
+			 *
 			 * @method initDate
 			 * @public
 			 * @return void
@@ -128,7 +128,7 @@
 
 			/**
 			 * 得到css属性的默认单位
-			 * 
+			 *
 			 * @method getUnits
 			 * @public
 			 * @param {string}  属性名
@@ -143,7 +143,7 @@
 
 			/**
 			 * 获取CSS属性值
-			 * 
+			 *
 			 * @method getAttr
 			 * @public
 			 * @param {string} 属性名
@@ -155,7 +155,7 @@
 
 			/**
 			 * 设置css属性值
-			 * 
+			 *
 			 * @method setAttr
 			 * @public
 			 * @param {string} 属性名
@@ -171,7 +171,7 @@
 
 			/**
 			 * 动画每一帧的处理
-			 * 
+			 *
 			 * @method onTween
 			 * @public
 			 * @param {number} 动画运行的百分比
@@ -190,7 +190,7 @@
 					if (value < 0 && this.patterns.noNegatives.test(attr)) {
 						value = 0;
 					}
-					
+
 					this.setAttr(attr, value, opts.units);
 
 					if(typeof opts.end != "undefined" && per == 1) {
@@ -201,7 +201,7 @@
 
 			/**
 			 * 判断动画是否在播放
-			 * 
+			 *
 			 * @method isPlay
 			 * @public
 			 * @return {bool} 是否播放
@@ -212,7 +212,7 @@
 
 			/**
 			 * 开始播放
-			 * 
+			 *
 			 * @method play
 			 * @public
 			 * @return void
@@ -220,10 +220,10 @@
 			play : function() {
 				this.effect.play();
 			},
-			
+
 			/**
 			 * 暂停播放
-			 * 
+			 *
 			 * @method pause
 			 * @public
 			 * @return void
@@ -234,7 +234,7 @@
 
 			/**
 			 * 继续播放
-			 * 
+			 *
 			 * @method resume
 			 * @public
 			 * @return void
@@ -245,7 +245,7 @@
 
 			/**
 			 * 直接播放到最后
-			 * 
+			 *
 			 * @method suspend
 			 * @public
 			 * @return void
@@ -256,7 +256,7 @@
 
 			/**
 			 * 停止播放
-			 * 
+			 *
 			 * @method stop
 			 * @public
 			 * @return void
@@ -267,7 +267,7 @@
 
 			/**
 			 * 重置动画
-			 * 
+			 *
 			 * @method reset
 			 * @public
 			 * @return void
@@ -283,7 +283,7 @@
 	mix(ScrollAnim.prototype, {
 		/**
 		 * 获取element属性值
-		 * 
+		 *
 		 * @method getAttr
 		 * @public
 		 * @param {string} 属性名
@@ -295,7 +295,7 @@
 
 		/**
 		 * 设置element属性值
-		 * 
+		 *
 		 * @method setAttr
 		 * @public
 		 * @param {string} 属性名
@@ -313,7 +313,7 @@
 
 		/**
 		 * ColorAnim用到的一些正则
-		 * 
+		 *
 		 * @public
 		 */
 		patterns : {
@@ -321,10 +321,10 @@
 			hex         : /^#?([0-9A-F]{2})([0-9A-F]{2})([0-9A-F]{2})$/i,
 			hex3        : /^#?([0-9A-F]{1})([0-9A-F]{1})([0-9A-F]{1})$/i
 		},
-				
+
 		/**
 		 * 处理颜色
-		 * 
+		 *
 		 * @method parseColor
 		 * @public
 		 * @param {string} 颜色值，支持三种形式：#000/#000000/rgb(0,0,0)
@@ -332,28 +332,28 @@
 		 */
 		parseColor : function(s){
 			if (s.length == 3) { return s; }
-		
+
 			var c = this.patterns.hex.exec(s);
 			if (c && c.length == 4) {
 				return [ parseInt(c[1], 16), parseInt(c[2], 16), parseInt(c[3], 16) ];
 			}
-		
+
 			c = this.patterns.rgb.exec(s);
 			if (c && c.length == 4) {
 				return [ parseInt(c[1], 10), parseInt(c[2], 10), parseInt(c[3], 10) ];
 			}
-		
+
 			c = this.patterns.hex3.exec(s);
 			if (c && c.length == 4) {
 				return [ parseInt(c[1] + c[1], 16), parseInt(c[2] + c[2], 16), parseInt(c[3] + c[3], 16) ];
 			}
-			
+
 			return [0, 0, 0];
 		},
-			
+
 		/**
 		 * 初始化数据
-		 * 
+		 *
 		 * @method initData
 		 * @public
 		 * @return void
@@ -382,7 +382,7 @@
 
 		/**
 		 * 获取CSS颜色
-		 * 
+		 *
 		 * @method setAttr
 		 * @public
 		 * @param {string} 属性名
@@ -394,7 +394,7 @@
 
 		/**
 		 * 设置CSS颜色
-		 * 
+		 *
 		 * @method setAttr
 		 * @public
 		 * @param {string} 属性名
@@ -411,7 +411,7 @@
 
 		/**
 		 * 动画每一帧的处理
-		 * 
+		 *
 		 * @method onTween
 		 * @public
 		 * @param {number} 动画运行的百分比
@@ -426,7 +426,7 @@
 					var value = s + opts.easing(per, opts.dis[i]);
 					values.push(Math.max(Math.floor(value),0));
 				});
-				
+
 				this.setAttr(attr, values);
 
 				if(typeof opts.end != "undefined" && per == 1) {

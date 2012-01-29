@@ -5,7 +5,7 @@
 
 /**
  * @class DateH 核心对象Date的扩展
- * @singleton 
+ * @singleton
  * @namespace QW
  * @helper
  */
@@ -13,7 +13,7 @@
 (function(){
 
 var DateH = {
-	/** 
+	/**
 	* 格式化日期
 	* @method format
 	* @static

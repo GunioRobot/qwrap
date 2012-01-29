@@ -5,10 +5,10 @@
 /**
  * @class Cookie Cookie¿‡
  * @namespace QW
- * @cfg {string} path 
- * @cfg {string} domain 
- * @cfg {number} expires 
- * @cfg {string} secure 
+ * @cfg {string} path
+ * @cfg {string} domain
+ * @cfg {number} expires
+ * @cfg {string} secure
  */
 
 (function() {
@@ -95,7 +95,7 @@
 	 * @return void
 	 */
 	Cookie.set=function(key,value,option){
-		var cookie = new Cookie(option); 
+		var cookie = new Cookie(option);
 		cookie.set(key,value);
 	};
 

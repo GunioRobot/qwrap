@@ -1,4 +1,4 @@
-/** 
+/**
 * @class EventTargetH EventTarget Helper，处理和事件触发目标有关的兼容问题
 * @singleton
 * @helper
@@ -16,7 +16,7 @@ QW.EventTargetH = function () {
 	var index = 0;
 
 
-	/** 
+	/**
 	* 获取key
 	* @method	getKey
 	* @private
@@ -44,7 +44,7 @@ QW.EventTargetH = function () {
 		return result;
 	};
 
-	/** 
+	/**
 	* 获取key
 	* @method	getDelegateKey
 	* @private
@@ -77,7 +77,7 @@ QW.EventTargetH = function () {
 		return result;
 	};
 
-	/** 
+	/**
 	* 通过key获取事件名
 	* @method	keyToName
 	* @private
@@ -88,7 +88,7 @@ QW.EventTargetH = function () {
 		return key.split('_')[1];
 	};
 
-	/** 
+	/**
 	* 通过key获取事件名
 	* @method	delegateKeyToName
 	* @private
@@ -99,7 +99,7 @@ QW.EventTargetH = function () {
 		return key.split('_')[2];
 	};
 
-	/** 
+	/**
 	* 监听方法
 	* @method	listener
 	* @private
@@ -114,7 +114,7 @@ QW.EventTargetH = function () {
 		};
 	};
 
-	/** 
+	/**
 	* 监听方法
 	* @method	delegateListener
 	* @private
@@ -127,7 +127,7 @@ QW.EventTargetH = function () {
 	var delegateListener = function (element, selector, name, handler) {
 		return function (e) {
 			var elements = [], node = e.srcElement || e.target;
-			
+
 			if (!node) return;
 
 			if (node.nodeType == 3) node = node.parentNode;
@@ -206,19 +206,19 @@ QW.EventTargetH = function () {
 		Types[newname] = { name : name, handler : handler };
 	};
 
-	/** 
+	/**
 	* 标准化事件名称
 	* @method	getName
 	* @private
 	* @param	{string}	name	事件名称
 	* @return	{string}	转换后的事件名称
 	*/
-	
+
 	var getName = function (name) {
 		return Types[name] ? Types[name].name : name;
 	};
 
-	/** 
+	/**
 	* 事件执行入口
 	* @method	fireHandler
 	* @private
@@ -236,7 +236,7 @@ QW.EventTargetH = function () {
 		}
 	};
 
-	/** 
+	/**
 	* 事件执行入口
 	* @method	fireHandler
 	* @param	{element}	element		触发事件对象
@@ -249,7 +249,7 @@ QW.EventTargetH = function () {
 		return handler.call(element, e);
 	};
 
-	/** 
+	/**
 	* 添加对指定事件的监听
 	* @method	on
 	* @param	{element}	element	监听目标
@@ -261,7 +261,7 @@ QW.EventTargetH = function () {
 		element = $(element);
 
 		var name = getName(oldname);
-		
+
 		var key = getKey(element, oldname, handler);
 
 		if (cache[key]) {
@@ -277,7 +277,7 @@ QW.EventTargetH = function () {
 		}
 	};
 
-	/** 
+	/**
 	* 移除对指定事件的监听
 	* @method	un
 	* @param	{element}	element	移除目标
@@ -286,9 +286,9 @@ QW.EventTargetH = function () {
 	* @return	{boolean}	事件监听是否移除成功
 	*/
 	E.un = function (element, oldname, handler) {
-		
+
 		element = $(element);
-		
+
 		if (handler) {
 
 			var name = getName(oldname);
@@ -299,17 +299,17 @@ QW.EventTargetH = function () {
 
 			if (_listener) {
 				E.removeEventListener(element, name, _listener);
-				
+
 				delete cache[key];
 
 				return true;
 			} else {
 				return false;
 			}
-		} else {			
+		} else {
 
 			var leftKey = '^' + getKey(element, oldname, handler), i, name;
-			
+
 			for (i in cache) {
 				if (new RegExp(leftKey, 'i').test(i)) {
 					name = keyToName(i);
@@ -322,7 +322,7 @@ QW.EventTargetH = function () {
 		}
 	};
 
-	/** 
+	/**
 	* 添加事件委托
 	* @method	delegate
 	* @param	{element}	element		被委托的目标
@@ -335,7 +335,7 @@ QW.EventTargetH = function () {
 		element = $(element);
 
 		var name = getName(oldname);
-		
+
 		var key = getDelegateKey(element, selector, oldname, handler);
 
 		if (delegateCache[key]) {
@@ -351,7 +351,7 @@ QW.EventTargetH = function () {
 		}
 	};
 
-	/** 
+	/**
 	* 移除事件委托
 	* @method	undelegate
 	* @param	{element}	element		被委托的目标
@@ -362,7 +362,7 @@ QW.EventTargetH = function () {
 	*/
 	E.undelegate = function (element, selector, oldname, handler) {
 		element = $(element);
-		
+
 		if (handler) {
 
 			var name = getName(oldname);
@@ -373,17 +373,17 @@ QW.EventTargetH = function () {
 
 			if (_listener) {
 				E.removeEventListener(element, name, _listener);
-				
+
 				delete delegateCache[key];
 
 				return true;
 			} else {
 				return false;
 			}
-		} else {			
+		} else {
 
 			var leftKey = '^' + getDelegateKey(element, selector, oldname, handler).replace(/([.*+?^=!:${}()|[\]\/\\])/g, '\\$1'), i, name;
-			
+
 			for (i in delegateCache) {
 				if (new RegExp(leftKey, 'i').test(i)) {
 					name = delegateKeyToName(i);
@@ -396,7 +396,7 @@ QW.EventTargetH = function () {
 		}
 	};
 
-	/** 
+	/**
 	* 触发对象的指定事件
 	* @method	fire
 	* @param	{element}	element	要触发事件的对象
@@ -411,7 +411,7 @@ QW.EventTargetH = function () {
 			element.fireEvent('on' + name);
 		} else {
 			var evt = null, doc = element.ownerDocument || element;
-			
+
 			if (/mouse|click/i.test(oldname)) {
 				evt = doc.createEvent('MouseEvents');
 				evt.initMouseEvent(name, true, true, doc.defaultView, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
@@ -437,7 +437,7 @@ QW.EventTargetH = function () {
 		}
 	};
 
-	/** 
+	/**
 	* 绑定对象的click事件或者执行click方法
 	* @method	click
 	* @param	{element}	element	要触发事件的对象
@@ -446,7 +446,7 @@ QW.EventTargetH = function () {
 	*/
 
 
-	/** 
+	/**
 	* 绑定对象的submit事件或者执行submit方法
 	* @method	submit
 	* @param	{element}	element	要触发事件的对象
@@ -454,7 +454,7 @@ QW.EventTargetH = function () {
 	* @return	{void}
 	*/
 
-	/** 
+	/**
 	* 绑定对象的focus事件或者执行focus方法
 	* @method	focus
 	* @param	{element}	element	要触发事件的对象
@@ -462,7 +462,7 @@ QW.EventTargetH = function () {
 	* @return	{void}
 	*/
 
-	/** 
+	/**
 	* 绑定对象的blur事件或者执行blur方法
 	* @method	blur
 	* @param	{element}	element	要触发事件的对象
@@ -490,7 +490,7 @@ QW.EventTargetH = function () {
 
 	void function () {
 		var UA = navigator.userAgent;
-		
+
 		if (/firefox/i.test(UA)) {
 			E.typedef('DOMMouseScroll', 'mousewheel');
 		}

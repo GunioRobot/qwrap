@@ -7,7 +7,7 @@
 
  (function() {
 	var Easing  = {
-		
+
 		easeNone: function(p,d) {
 			return d*p;
 		},

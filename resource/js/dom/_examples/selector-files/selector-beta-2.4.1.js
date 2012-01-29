@@ -48,7 +48,7 @@ X.NTH_CHILD = '^(?:(\\d*)(n){1}|(odd|even)$)*([-+]?\\d*)$';
 X.URL_ATTR = '^href|url$';
 Selector.prototype = {
     /**
-     * Default document for use queries 
+     * Default document for use queries
      * @property document
      * @type object
      * @default window.document
@@ -66,7 +66,7 @@ Selector.prototype = {
     },
 
     /**
-     * Mapping of shorthand tokens to corresponding attribute selector 
+     * Mapping of shorthand tokens to corresponding attribute selector
      * @property shorthand
      * @type object
      */
@@ -77,7 +77,7 @@ Selector.prototype = {
     },
 
     /**
-     * List of operators and corresponding boolean functions. 
+     * List of operators and corresponding boolean functions.
      * These functions are passed the attribute and the current node's value of the attribute.
      * @property operators
      * @type object
@@ -85,7 +85,7 @@ Selector.prototype = {
     operators: {
         '=': function(attr, val) { return attr === val; }, // Equality
         '!=': function(attr, val) { return attr !== val; }, // Inequality
-        '~=': function(attr, val) { // Match one of space seperated words 
+        '~=': function(attr, val) { // Match one of space seperated words
             var str = X.BEGIN_SPACE + val + X.END_SPACE;
             regexCache[str] = regexCache[str] || new RegExp(str); // skip getRegExp call for perf boost
 
@@ -95,12 +95,12 @@ Selector.prototype = {
         '|=': function(attr, val) { return getRegExp(X.BEGIN + val + '[-]?').test(attr); }, // Match start with value followed by optional hyphen
         '^=': function(attr, val) { return attr.indexOf(val) === 0; }, // Match starts with value
         '$=': function(attr, val) { return attr.lastIndexOf(val) === attr.length - val.length; }, // Match ends with value
-        '*=': function(attr, val) { return attr.indexOf(val) > -1; }, // Match contains value as substring 
+        '*=': function(attr, val) { return attr.indexOf(val) > -1; }, // Match contains value as substring
         '': function(attr, val) { return attr; } // Just test for existence of attribute
     },
 
     /**
-     * List of pseudo-classes and corresponding boolean functions. 
+     * List of pseudo-classes and corresponding boolean functions.
      * These functions are called with the current node, and any value that was parsed with the pseudo regex.
      * @property pseudos
      * @type object
@@ -121,11 +121,11 @@ Selector.prototype = {
         'nth-of-type': function(node, val) {
             return getNth(node, val, node.tagName);
         },
-         
+
         'nth-last-of-type': function(node, val) {
             return getNth(node, val, node.tagName, true);
         },
-         
+
         'first-child': function(node) {
             return getChildren(node.parentNode)[0] === node;
         },
@@ -138,12 +138,12 @@ Selector.prototype = {
         'first-of-type': function(node, val) {
             return getChildren(node.parentNode, node.tagName.toLowerCase())[0];
         },
-         
+
         'last-of-type': function(node, val) {
             var children = getChildren(node.parentNode, node.tagName.toLowerCase());
             return children[children.length - 1];
         },
-         
+
         'only-child': function(node) {
             var children = getChildren(node.parentNode);
             return children.length === 1 && children[0] === node;
@@ -177,7 +177,7 @@ Selector.prototype = {
      * @param {string} selector The CSS Selector to test the node against.
      * @return{boolean} Whether or not the node matches the selector.
      * @static
-    
+
      */
     test: function(node, selector) {
         node = Selector.document.getElementById(node) || node;
@@ -194,10 +194,10 @@ Selector.prototype = {
     },
 
     /**
-     * Filters a set of nodes based on a given CSS selector. 
+     * Filters a set of nodes based on a given CSS selector.
      * @method filter
      *
-     * @param {array}  A set of nodes/ids to filter. 
+     * @param {array}  A set of nodes/ids to filter.
      * @param {string} selector The selector used to test each node.
      * @return{array} An array of nodes from the supplied array that match the given selector.
      * @static
@@ -212,9 +212,9 @@ Selector.prototype = {
 
         if (!nodes.item) { // if not HTMLCollection, handle arrays of ids and/or nodes
             for (var i = 0, len = arr.length; i < len; ++i) {
-                if (!arr[i].tagName) { // tagName limits to HTMLElements 
+                if (!arr[i].tagName) { // tagName limits to HTMLElements
                     node = Selector.document.getElementByid(arr[i]);
-                    if (node) { // skip IDs that return null 
+                    if (node) { // skip IDs that return null
                         nodes[nodes.length] = node;
                     } else {
                     }
@@ -227,7 +227,7 @@ Selector.prototype = {
     },
 
     /**
-     * Retrieves a set of nodes based on a given CSS selector. 
+     * Retrieves a set of nodes based on a given CSS selector.
      * @method query
      *
      * @param {string} selector The CSS Selector to test the node against.
@@ -251,7 +251,7 @@ var query = function(selector, root, firstOnly, deDupe) {
 
     if (groups.length > 1) {
         for (var i = 0, len = groups.length; i < len; ++i) {
-            result = result.concat( arguments.callee(groups[i], root, firstOnly, true) ); 
+            result = result.concat( arguments.callee(groups[i], root, firstOnly, true) );
         }
         clearFoundCache();
         return result;
@@ -271,7 +271,7 @@ var query = function(selector, root, firstOnly, deDupe) {
         node,
         id,
         token = tokens.pop();
-        
+
     if (idToken) {
         id = getId(idToken.attributes);
     }
@@ -296,7 +296,7 @@ var query = function(selector, root, firstOnly, deDupe) {
     }
 
     if (nodes.length) {
-        result = rFilter(nodes, token, firstOnly, deDupe); 
+        result = rFilter(nodes, token, firstOnly, deDupe);
     }
     clearParentCache();
     return result;
@@ -319,9 +319,9 @@ var contains = function() {
                     return true;
                 }
                 parent = parent.parentNode;
-            } 
+            }
             return false;
-        }; 
+        };
     }
 }();
 
@@ -353,7 +353,7 @@ var rTestNode = function(node, selector, token) {
 
     if (!node || node._found || (token.tag != '*' && node.tagName.toLowerCase() != token.tag)) {
         return false; // tag match failed
-    } 
+    }
 
     var ops = Selector.operators,
         ps = Selector.pseudos,
@@ -433,7 +433,7 @@ var combinators = {
                 return true;
             }
             node = node.parentNode;
-        }  
+        }
         return false;
     },
 
@@ -447,7 +447,7 @@ var combinators = {
         }
 
         if (sib && rTestNode(sib, null, token.previous)) {
-            return true; 
+            return true;
         }
         return false;
     },
@@ -496,7 +496,7 @@ var getChildren = function() {
     an+b = get every _a_th node starting at the _b_th
     0n+b = no repeat ("0" and "n" may both be omitted (together) , e.g. "0n+1" or "1", not "0+1"), return only the _b_th element
     1n+b =  get every element starting from b ("1" may may be omitted, e.g. "1n+0" or "n+0" or "n")
-    an+0 = get every _a_th element, "0" may be omitted 
+    an+0 = get every _a_th element, "0" may be omitted
 */
 var getNth = function(node, expr, tag, reverse) {
     if (tag) tag = tag.toLowerCase();
@@ -587,13 +587,13 @@ var tokenize = function(selector) {
             combinator: RegExp.$4
         };
 
-        // Parse pseudos first, then strip from predicate to 
+        // Parse pseudos first, then strip from predicate to
         // avoid false positive from :not.
         while (m = rePseudo.exec(token.predicate)) {
             token.predicate = token.predicate.replace(m[0], '');
             token.pseudos[token.pseudos.length] = m.slice(1);
         }
-        
+
         while (m = reAttr.exec(token.predicate)) { // parse attributes
             if (aliases[m[1]]) { // convert reserved words, etc
                 m[1] = aliases[m[1]];
@@ -604,14 +604,14 @@ var tokenize = function(selector) {
             }
             token.attributes[token.attributes.length] = attr;
         }
-        
+
         token.id = getId(token.attributes);
         if (token.previous) {
             token.previous.combinator = token.previous.combinator || ' ';
         }
         tokens[tokens.length] = token;
         selector = trim(selector.substr(token.simple.length));
-    } 
+    }
     return tokens;
 };
 

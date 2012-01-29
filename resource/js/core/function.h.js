@@ -5,7 +5,7 @@
 
 /**
  * @class FunctionH 核心对象Function的扩展
- * @singleton 
+ * @singleton
  * @namespace QW
  * @helper
  */
@@ -108,7 +108,7 @@ var FunctionH = {
 	* 对函数进行集化，使其在第一个参数为array时，结果也返回一个数组
 	* @method mul
 	* @static
-	* @param {func} 
+	* @param {func}
 	* @return {Object} 已集化的函数
 	*/
 	mul: function(func, recursive){
@@ -121,7 +121,7 @@ var FunctionH = {
 				for(var i = 0, len = list.length; i < len; i++){
 					moreArgs[0]=list[i];
 					var r = fn.apply(this, moreArgs);
-					ret.push(r); 	
+					ret.push(r);
 				}
 				return ret;
 			}else{
@@ -134,13 +134,13 @@ var FunctionH = {
 	 * 函数返回值重定向变换
 	 * @method rwrap
 	 * @static
-	 * @param {func} 
+	 * @param {func}
 	 * @return {Function}
-	 */	
+	 */
 	rdir: function(func,idx){
 		idx = idx | 0;
-		return function(){ 
-			var ret = func.apply(this,arguments); 
+		return function(){
+			var ret = func.apply(this,arguments);
 			if(idx >= 0)
 				return arguments[idx];
 			return ret;
@@ -150,7 +150,7 @@ var FunctionH = {
 	 * 函数包装变换
 	 * @method rwrap
 	 * @static
-	 * @param {func} 
+	 * @param {func}
 	 * @return {Function}
 	 */
 	rwrap: function(func,wrapper,idx){
@@ -167,7 +167,7 @@ var FunctionH = {
 	 * 绑定
 	 * @method bind
 	 * @static
-	 * @param {func} 
+	 * @param {func}
 	 * @return {Function}
 	 */
 	bind: function(func, thisObj){
@@ -175,7 +175,7 @@ var FunctionH = {
 			return func.apply(thisObj, arguments);
 		}
 	},
-	/** 
+	/**
 	* 懒惰执行某函数：一直到不得不执行的时候才执行。
 	* @method lazyApply
 	* @static
